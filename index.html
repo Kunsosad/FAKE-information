@@ -6,19 +6,21 @@
   <title>Hệ Thống Thông Tin Sinh Viên — Mock UI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@700;800&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root{
-      --blue:#2f7cf6;      /* thanh menu */
-      --blue-dark:#1f66d6; /* hover */
-      --blue-weak:#e8f0ff; /* nền nhẹ */
-      --border:#e5e7eb;    /* xám viền */
-      --text:#111827;      /* đen */
-      --muted:#6b7280;     /* xám chữ phụ */
-      --accent:#2563eb;    /* nút */
-      --accent-2:#0b57d0;  /* nút hover */
-      --danger:#e11d48;    /* thông báo đỏ */
+      --blue:#2f7cf6;
+      --blue-dark:#1f66d6;
+      --blue-weak:#e8f0ff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --accent:#2563eb;
+      --accent-2:#0b57d0;
+      --danger:#e11d48;
       --bg:#ffffff;
+      --brand-blue:#1f4fbf;
+      --brand-gray:#334155;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:#fafafa;color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
@@ -26,10 +28,10 @@
 
     /* --- Header brand --- */
     .brand{display:flex;align-items:center;gap:18px;padding:14px 0}
-    .logo{width:54px;height:54px;border-radius:8px;background:linear-gradient(135deg,#0ea5e9,#2563eb);display:grid;place-items:center;color:#fff;font-weight:800;letter-spacing:0.5px;box-shadow:0 6px 14px rgba(37,99,235,.25)}
-    .brand-title{line-height:1.15}
-    .brand-title h1{margin:0;font-size:24px;font-weight:800;letter-spacing:.2px}
-    .brand-title small{display:block;font-size:14px;color:#334155;margin-top:2px}
+    .brand-mark{width:66px;height:66px;object-fit:contain;border-radius:6px;background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.08)}
+    .brand-title{line-height:1.1;display:flex;flex-direction:column}
+    .brand-title h1{display:none}
+    .brand-vi{font-family:'Be Vietnam Pro', Inter, system-ui; font-weight:800; font-size:28px; color:var(--brand-blue); letter-spacing:1px; text-transform:uppercase; transform:skewX(-6deg);} .brand-en{font-family:'Merriweather', serif; font-style:italic; color:#2d3748; margin-top:2px; font-size:18px;}
 
     /* --- Top nav --- */
     .topnav{background:var(--blue);color:#fff}
@@ -94,13 +96,17 @@
   </style>
 </head>
 <body>
-  <header class="container brand">
-    <div class="logo">BK</div>
-    <div class="brand-title">
-      <h1>HỆ THỐNG THÔNG TIN SINH VIÊN</h1>
-      <small>Student Information System</small>
-    </div>
-  </header>
+ <header class="container brand">
+  <img
+    src="https://scontent.fdad3-6.fna.fbcdn.net/v/t1.15752-9/550370888_676475511543267_2453613519188178628_n.png?_nc_cat=106&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFiDLkqSRizT3x4JAKutbOHvSFcMTjVsvy9IVwxONWy_JmXy06DbFuodNxQsC55cUkdGtAK-jOgCh7D0W4izklA&_nc_ohc=PNlYxZjMLVAQ7kNvwGBis8Q&_nc_oc=AdlMg7IIU8xaQCJYBUNdoASFG3hjcDZPD15h2JwA_uWZu5k3eCjJ2Zy644OfIcVUrrNStoQIBsEbIabws4JPnpZ_&_nc_zt=23&_nc_ht=scontent.fdad3-6.fna&oh=03_Q7cD3QFul_QXXRpfUJHH6rf68I_MvqxUg6NLPAtPHHOe9FCsLA&oe=68F3A428"
+    alt="Bách Khoa Đà Nẵng"
+    class="brand-mark"
+  />
+  <div class="brand-title">
+    <div class="brand-vi">HỆ THỐNG THÔNG TIN SINH VIÊN</div>
+    <div class="brand-en">Student Information System</div>
+  </div>
+</header>
 
   <nav class="topnav">
     <div class="container topnav-wrap">
@@ -119,7 +125,16 @@
 
   <main class="container">
     <div class="section-header">
-      <div class="icon">₫</div>
+      <div class="icon" aria-hidden="true">
+        <!-- spreadsheet/table icon - inline SVG -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="4" width="18" height="16" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M3 9H21M3 14H21" stroke="currentColor" stroke-width="2"/>
+          <path d="M8 4V20M16 4V20" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+      <h2>Thông tin sinh viên</h2>
+    </div>
       <h2>Học phí</h2>
     </div>
 
@@ -334,8 +349,6 @@
         </table>
       </div>
     </section>
-
-    <p style="color:#64748b;margin:14px 2px">* Đây là bản mô phỏng giao diện tĩnh phục vụ demo (không kết nối dữ liệu thực).</p>
   </main>
 
 </body>
