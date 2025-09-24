@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Học phí — Mock UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@700;800&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue:#2f7cf6;--blue-dark:#1f66d6;--blue-weak:#e8f0ff;--border:#e5e7eb;--text:#111827;--muted:#6b7280;--accent:#2563eb;--danger:#e11d48;--brand-blue:#1f4fbf;--bg:#fff
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#fafafa;color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    .container{max-width:1180px;margin:0 auto;padding:0 16px}
+
+    /* Brand */
+    .brand{display:flex;align-items:center;gap:18px;padding:14px 0}
+    .brand-mark{width:66px;height:66px;object-fit:contain;border-radius:6px;background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.08)}
+    .brand-title{line-height:1.1;display:flex;flex-direction:column}
+    .brand-vi{font-family:'Be Vietnam Pro', Inter, system-ui; font-weight:800; font-size:28px; color:var(--brand-blue); letter-spacing:1px; text-transform:uppercase; transform:skewX(-6deg);}
+    .brand-en{font-family:'Merriweather', serif; font-style:italic; color:#2d3748; margin-top:2px; font-size:18px;}
+
+    /* Top nav */
+    .topnav{background:var(--blue);color:#fff}
+    .topnav-wrap{display:flex;align-items:center;gap:20px}
+    .menu{display:flex;align-items:center;gap:10px}
+    .menu > a, .menu .menu-item > a{display:block;color:#fff;text-decoration:none;font-weight:700;padding:12px 16px;border-radius:10px}
+    .menu > a:hover, .menu .menu-item > a:hover{background:var(--blue-dark)}
+    .spacer{flex:1}
+    .welcome{font-weight:600;opacity:.95}
+    .logout{color:#fff;text-decoration:none;font-weight:700;background:rgba(255,255,255,.15);padding:8px 12px;border-radius:10px;margin-left:8px}
+    .logout:hover{background:rgba(255,255,255,.25)}
+    /* dropdown */
+    .menu .menu-item{position:relative}
+    .menu .dropdown{position:absolute;top:100%;left:0;min-width:280px;background:#4f8ef7;color:#fff;border-radius:8px;padding:6px 0;box-shadow:0 12px 24px rgba(0,0,0,.12);display:none;z-index:50}
+    .menu .menu-item:hover .dropdown{display:block}
+    .menu .dropdown a{display:block;color:#fff;text-decoration:none;padding:10px 16px;font-weight:600;white-space:nowrap}
+    .menu .dropdown a:hover{background:rgba(255,255,255,.15)}
+
+    /* Section header */
+    .section-header{display:flex;align-items:center;gap:12px;margin:18px 0}
+    .section-header .icon{width:36px;height:36px;background:var(--blue-weak);border-radius:8px;display:grid;place-items:center;color:var(--accent);font-weight:900}
+    .section-header h2{margin:0;font-size:22px}
+
+    /* Toolbar */
+    .toolbar{display:flex;gap:10px;align-items:center}
+    select,.btn{height:36px;border:1px solid var(--border);border-radius:8px;padding:0 12px;font-size:14px;background:#fff}
+    .btn{background:var(--accent);border-color:transparent;color:#fff;font-weight:700;cursor:pointer}
+    .btn:hover{background:#0b57d0}
+
+    /* Cards & tables */
+    .card{margin-top:14px;border:1px solid var(--border);border-radius:14px;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+    .card-head{padding:12px 16px;border-bottom:1px solid var(--border);background:#f9fafb;border-top-left-radius:14px;border-top-right-radius:14px;font-weight:700}
+    .card-body{padding:18px 16px}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .field{display:flex;align-items:center;gap:10px}
+    .label{width:120px;color:var(--muted);font-weight:600}
+    .control{flex:1}
+    .control input{width:100%;height:36px;border:1px solid var(--border);border-radius:8px;padding:0 10px;background:#f9fafb}
+
+    .alert{margin:8px 0 2px;color:#fff;background:#e11d48;border-radius:10px;padding:10px 12px;font-weight:700}
+
+    .panel{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.04);margin-top:16px}
+    .panel-head{display:flex;justify-content:space-between;align-items:center;background:#f3f4f6;padding:10px 14px;font-weight:800}
+    .panel-body{padding:0}
+    .table-wrap{overflow-x:auto}
+    table.table{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
+    .table th,.table td{border:1px solid var(--border);padding:8px 10px}
+    .table th{background:#f8fafc;text-align:left}
+    .table tr:nth-child(even) td{background:#fafafa}
+    .tcenter{text-align:center}
+    .num{text-align:right;white-space:nowrap}
+    .sum-row td{background:#fffbe6;font-weight:800}
+    .text-red{color:#e11d48}
+
+    @media (max-width: 860px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="container brand">
+    <img src="https://scontent.fdad3-6.fna.fbcdn.net/v/t1.15752-9/550370888_676475511543267_2453613519188178628_n.png?_nc_cat=106&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeFiDLkqSRizT3x4JAKutbOHvSFcMTjVsvy9IVwxONWy_JmXy06DbFuodNxQsC55cUkdGtAK-jOgCh7D0W4izklA&_nc_ohc=PNlYxZjMLVAQ7kNvwGBis8Q&_nc_oc=AdlMg7IIU8xaQCJYBUNdoASFG3hjcDZPD15h2JwA_uWZu5k3eCjJ2Zy644OfIcVUrrNStoQIBsEbIabws4JPnpZ_&_nc_zt=23&_nc_ht=scontent.fdad3-6.fna&oh=03_Q7cD3QFul_QXXRpfUJHH6rf68I_MvqxUg6NLPAtPHHOe9FCsLA&oe=68F3A428" alt="Bách Khoa Đà Nẵng" class="brand-mark" />
+    <div class="brand-title">
+      <div class="brand-vi">HỆ THỐNG THÔNG TIN SINH VIÊN</div>
+      <div class="brand-en">Student Information System</div>
+    </div>
+  </header>
+
+  <nav class="topnav">
+    <div class="container topnav-wrap">
+      <div class="menu" role="navigation" aria-label="Main">
+        <div class="menu-item has-dropdown">
+          <a href="#">Cá nhân</a>
+          <div class="dropdown" role="menu">
+            <a href="#">Thông tin nhân thân</a>
+            <a href="#">Khung Chương trình đào tạo</a>
+            <a href="#">Lịch học, thi & khảo sát ý kiến</a>
+            <a href="hoc-phi.html" aria-current="page">Học phí</a>
+            <a href="#">Tự đánh giá rèn luyện</a>
+            <a href="#">Kết quả phục vụ cộng đồng</a>
+            <a href="#">Đồ án/ Luận văn tốt nghiệp</a>
+            <a href="ket-qua.html">Kết quả học tập, rèn luyện</a>
+            <a href="#">Kê khai chương trình đào tạo</a>
+          </div>
+        </div>
+        <a href="#">Lớp/ Đoàn/ Hội</a>
+        <a href="#">Đăng ký</a>
+        <a href="#">Đề nghị Trường</a>
+        <a href="#">Phản ánh</a>
+      </div>
+      <div class="spacer"></div>
+      <div class="welcome">Chào Phan Công Huy-24C1B (101240071)</div>
+      <a class="logout" href="#">Thoát</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="section-header">
+      <div class="icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="4" width="18" height="16" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M3 9H21M3 14H21" stroke="currentColor" stroke-width="2"/>
+          <path d="M8 4V20M16 4V20" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+      <h2>Học phí</h2>
+    </div>
+
+    <div class="toolbar">
+      <select>
+        <option>Học kỳ 1 năm học 2025-2026</option>
+        <option>Học kỳ 2 năm học 2025-2026</option>
+      </select>
+      <button class="btn">Dữ liệu</button>
+    </div>
+
+    <section class="card">
+      <div class="card-head">Lập đơn đề nghị hoãn đóng học phí Học kỳ 1 / Năm học 2025 - 2026</div>
+      <div class="card-body">
+        <div class="grid">
+          <div class="field">
+            <div class="label">Họ tên:</div>
+            <div class="control"><input value="Phan Công Huy" disabled></div>
+          </div>
+          <div class="field">
+            <div class="label">Số thẻ SV:</div>
+            <div class="control"><input value="101240071" disabled></div>
+          </div>
+          <div class="field">
+            <div class="label">Điện thoại:</div>
+            <div class="control"><input value="0987520146" disabled></div>
+          </div>
+          <div class="field">
+            <div class="label">Lớp:</div>
+            <div class="control"><input value="24C1B" disabled></div>
+          </div>
+        </div>
+
+        <div class="alert">Hạn nộp đơn hoãn học phí trước ngày 01/01/0001. Đã hết hạn đề nghị Trường hoãn đóng học phí!</div>
+
+        <div class="footerbar" style="margin-top:8px;display:flex;align-items:center;gap:8px;font-weight:600">
+          <span class="muted" style="color:#6b7280">Chọn đợt hoãn đóng học phí:</span>
+          <select>
+            <option>Đợt 1</option>
+            <option>Đợt 2</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== BẢNG HỌC PHÍ LỚP HỌC PHẦN ====== -->
+    <section class="panel">
+      <div class="panel-head">
+        <div>Học phí lớp học phần</div>
+        <div class="panel-meta" style="font-weight:600;color:#475569;font-size:13px">Ấn định đóng đợt này, không thay đổi</div>
+      </div>
+      <div class="panel-body table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:56px">STT</th>
+              <th style="width:190px">Mã lớp học phần</th>
+              <th>Tên lớp học phần</th>
+              <th style="width:80px">Số TC</th>
+              <th style="width:70px">CLC</th>
+              <th style="width:140px">Học phí</th>
+              <th style="width:90px">Học lại</th>
+              <th style="width:160px">Đăng ký đóng ở đợt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tcenter">1</td>
+              <td>0130490.2510.24.02</td>
+              <td>B24-GDTC3-VVN-02</td>
+              <td class="num">0</td>
+              <td class="tcenter"></td>
+              <td class="num">495,000</td>
+              <td class="tcenter"></td>
+              <td class="tcenter"></td>
+            </tr>
+            <tr>
+              <td class="tcenter">2</td>
+              <td>1032750.2510.24.26</td>
+              <td>Đồ họa kỹ thuật</td>
+              <td class="num">3</td>
+              <td class="tcenter"></td>
+              <td class="num">2,520,000</td>
+              <td class="tcenter"></td>
+              <td class="tcenter"></td>
+            </tr>
+            <tr>
+              <td class="tcenter">3</td>
+              <td>3190121.2510.24.15</td>
+              <td>Giải tích 2</td>
+              <td class="num">4</td>
+              <td class="tcenter"></td>
+              <td class="num">3,360,000</td>
+              <td class="tcenter"></td>
+              <td class="tcenter"></td>
+            </tr>
+            <tr>
+              <td class="tcenter">4</td>
+              <td>1182550.2510.22.28</td>
+              <td>Kinh tế và quản lý doanh nghiệp</td>
+              <td class="num">2</td>
+              <td class="tcenter"></td>
+              <td class="num">1,680,000</td>
+              <td class="tcenter"></td>
+              <td class="tcenter"></td>
+            </tr>
+            <tr>
+              <td class="tcenter">5</td>
+              <td>1022920.2510.24.01</td>
+              <td>Kỹ thuật lập trình</td>
+              <td class="num">2</td>
+              <td class="tcenter"></td>
+              <td class="num">1,680,000</td>
+              <td class="tcenter"></td>
+              <td class="tcenter"></td>
+            </tr>
+            <tr>
+              <td class="tcenter">6</td>
+              <td>1040451.2510.24.01</td>
+              <td>Kỹ thuật nhiệt</td>
+              <td class="num">2</td>
+              <td class="tcenter"></td>
+              <td class="num">1,680,000</td>
+              <td class="tcenter"></td>
+              <td class="tcenter"></td>
+            </tr>
+            <tr>
+              <td class="tcenter">7</td>
+              <td>1012630.2510.22.90</td>
+              <td>Toán CN 3: Quy hoạch TN trong cơ khí</td>
+              <td class="num">2.5</td>
+              <td class="tcenter"></td>
+              <td class="num">2,100,000</td>
+              <td class="tcenter"></td>
+              <td class="tcenter"></td>
+            </tr>
+            <tr>
+              <td class="tcenter">8</td>
+              <td>3050641.2510.24.01</td>
+              <td>Vật lý 2</td>
+              <td class="num">3</td>
+              <td class="tcenter"></td>
+              <td class="num">2,520,000</td>
+              <td class="tcenter"></td>
+              <td class="tcenter"></td>
+            </tr>
+            <tr class="sum-row">
+              <td colspan="3" class="num">Tổng cộng:</td>
+              <td class="num">18.5</td>
+              <td></td>
+              <td class="num text-red">16,035,000</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ====== HỌC PHÍ ĐÃ NỘP TRONG KỲ ====== -->
+    <section class="panel">
+      <div class="panel-head">Học phí đã nộp trong kỳ</div>
+      <div class="panel-body table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:56px">STT</th>
+              <th>Học kỳ</th>
+              <th style="width:180px">Số tiền nộp</th>
+              <th style="width:160px">Ngày nộp</th>
+              <th>Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tcenter">—</td>
+              <td colspan="4" class="tcenter" style="color:#64748b">Chưa có khoản đã nộp</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ====== HỌC PHÍ CẦN NỘP ====== -->
+    <section class="panel">
+      <div class="panel-head">Học phí sinh viên cần nộp:</div>
+      <div class="panel-body table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:56px">STT</th>
+              <th>Học kỳ</th>
+              <th style="width:180px">Số tiền cần nộp</th>
+              <th>Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tcenter">1</td>
+              <td>Học kỳ 1 năm học 2025-2026</td>
+              <td class="num">9 621 000</td>
+              <td>Số tiền nộp đợt 1 (~60% học phí)</td>
+            </tr>
+            <tr class="sum-row">
+              <td colspan="2" class="num">Tổng học phí cần nộp:</td>
+              <td class="num text-red">9 621 000</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
