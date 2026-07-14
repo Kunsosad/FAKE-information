@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Hệ thống Thông tin Sinh viên</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+  <header class="masthead"><div class="brand"><img src="assets/logo.png" alt="Hệ thống Thông tin Sinh viên"></div></header>
+  <nav class="topnav">
+    <div class="nav-inner">
+      <div class="personal-menu">
+        <button class="nav-button personal-button" type="button">Cá nhân</button>
+        <div class="dropdown" role="menu">
+          <button data-view="profile">Thông tin nhân thân</button>
+          <button>Khung Chương trình đào tạo</button>
+          <button>Lịch học, thi &amp; Khảo sát ý kiến</button>
+          <button data-view="tuition">Học phí</button>
+          <button>Tự đánh giá rèn luyện</button>
+          <button>Kết quả phục vụ cộng đồng</button>
+          <button>Đồ án/ Luận văn tốt nghiệp</button>
+          <button data-view="gpa">Kết quả học tập, rèn luyện</button>
+          <button data-view="gpa">Kết quả học tập học kỳ hiện tại</button>
+          <button>Kê khai chương trình đào tạo</button>
+        </div>
+      </div>
+      <button class="nav-button">Lớp/ Đoàn/ Hội</button>
+      <button class="nav-button">Đăng ký</button>
+      <button class="nav-button">Đề nghị Trường</button>
+      <button class="nav-button">Phản ánh</button>
+      <span class="welcome">Chào <strong>Phan Công Huy-24C1B (101240071)</strong></span>
+      <button class="nav-button">Thoát</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="view" id="profileView">
+      <h1 class="page-title"><span class="page-icon"></span>Thông tin sinh viên</h1>
+      <div class="profile-tabs"><button class="active">Thông tin nhân thân &amp; ngành học</button><button>Đổi mật khẩu</button></div>
+      <section class="box profile-box">
+        <h2>Thông tin cá nhân:</h2>
+        <div class="profile-layout">
+          <div class="portrait"><span>PH</span></div>
+          <div class="field-grid" id="personalFields"></div>
+        </div>
+        <div class="academic-grid" id="academicFields"></div>
+      </section>
+      <section class="box family-box">
+        <h2>Thông tin nhân thân:</h2>
+        <h3>Gia đình:</h3><div class="family-grid" id="familyFields"></div>
+        <h3>Thường trú gia đình:</h3><div class="family-grid" id="homeFields"></div>
+        <h3>Khi khẩn cấp, Trường báo tin cho người thân theo thông tin liên hệ sau đây:</h3><div class="family-grid" id="emergencyFields"></div>
+      </section>
+    </section>
+
+    <section class="view active" id="gpaView">
+      <h1 class="page-title"><span class="page-icon"></span>Kết quả học tập và rèn luyện đạo đức</h1>
+      <section class="box">
+        <h2>Tổng hợp kết quả học tập và rèn luyện đạo đức</h2>
+        <div class="table-scroll"><table class="summary-table"><thead>
+          <tr><th rowspan="2">Học kỳ/ Năm học</th><th colspan="8">Kết quả ở học kỳ</th><th colspan="3">Kết quả tích lũy</th></tr>
+          <tr><th>Số tín chỉ<br>đăng ký</th><th>Số tín chỉ<br>học lại</th><th>Điểm TBC<br>học kỳ T4</th><th>Điểm TBC<br>học bổng</th><th>Điểm TBC<br>học kỳ T10</th><th>Xếp loại học tập</th><th>Điểm rèn luyện</th><th>Bị cảnh báo<br>KQHT</th><th>Số tín chỉ<br>tích lũy</th><th>Điểm TBC<br>tích lũy T4</th><th>Điểm TB<br>RL các kỳ</th></tr>
+        </thead><tbody id="summaryBody"></tbody></table></div>
+      </section>
+      <div class="pink-note">*Ghi chú: Khối lượng học tập trong kỳ phụ được gộp chung vào học kỳ chính. Dữ liệu học kỳ sau cùng có thể chưa tuyệt đối chính xác, do đang trong quá trình cập nhật điểm.</div>
+      <section class="box certificates">
+        <h2>Chứng chỉ, điều kiện tốt nghiệp</h2>
+        <div class="checks"><label><input type="checkbox"> Đã có chứng chỉ Giáo dục thể chất</label><label><input type="checkbox"> Đã có chứng chỉ Giáo dục QP-AN</label><label><input type="checkbox"> Đã có chứng chỉ Tin học</label></div>
+        <div class="certificate-grid"><label>Khen thưởng: <input></label><label>Kỷ luật: <input></label><label>Thông tin kết quả xét nhận ĐATN: <textarea></textarea></label><label>Thông tin kết quả xét công nhận TN: <textarea></textarea></label></div>
+      </section>
+      <section class="box"><h2>Chứng chỉ ngoại ngữ đã nộp</h2><div class="table-scroll"><table><thead><tr><th>STT</th><th>Mã chứng chỉ</th><th>Tên chứng chỉ</th><th>Điểm</th><th>Ngày cấp</th><th>Bậc CC</th><th>Ghi chú</th></tr></thead><tbody><tr class="empty-row"><td colspan="7"></td></tr></tbody></table></div></section>
+      <section class="box grades-box">
+        <h2>Chi tiết kết quả học tập các học kỳ</h2>
+        <div class="table-scroll"><table class="grades-table"><thead>
+          <tr><th rowspan="2">TT</th><th colspan="5">Thông tin lớp học phần</th><th colspan="8">Chi tiết điểm đánh giá lớp học phần</th><th colspan="2">Khảo sát ý kiến</th></tr>
+          <tr><th>Kỳ/ Năm học</th><th>Kỳ phụ</th><th>Mã lớp học phần</th><th>Tên lớp học phần</th><th>Số TC</th><th>Công thức điểm</th><th>BT</th><th>CK</th><th>GK</th><th>QT</th><th>Thang 10</th><th>Thang 4</th><th>Chữ</th><th>Lấy ý kiến</th><th>Đã góp ý</th></tr>
+        </thead><tbody id="gradesBody"></tbody></table></div>
+      </section>
+    </section>
+
+    <section class="view" id="tuitionView">
+      <h1 class="page-title"><span class="page-icon"></span>Học phí</h1>
+      <div class="semester-bar"><select><option>Học kỳ 2 năm học 2025-2026</option></select><button>Dữ liệu</button></div>
+      <section class="box tuition-request">
+        <h2>Lập đơn đề nghị hoãn đóng học phí Học kỳ 1 / Năm học 2025 - 2026</h2>
+        <div class="request-grid"><label>Họ tên: <input value="Phan Công Huy" readonly></label><label>Số thẻ SV: <input value="101240071" readonly></label><label>Điện thoại: <input value="0987520146" readonly></label><label>Lớp: <input value="24C1B" readonly></label></div>
+        <p class="red-warning">Hạn nộp đơn hoãn học phí trước ngày 01/01/0001. Đã hết hạn đề nghị Trường hoãn đóng học phí!</p>
+        <label class="installment">Chọn đợt hoãn đóng học phí: <select disabled><option>Đợt 1</option></select></label>
+      </section>
+      <section class="box"><h2>Học phí lớp học phần</h2><div class="table-scroll"><table class="tuition-table"><thead><tr><th>STT</th><th>Mã lớp học phần</th><th>Tên lớp học phần</th><th>Số TC</th><th>CLC</th><th>Học phí</th><th>Học lại</th><th>Đăng ký<br>đóng ở đợt</th><th>Ấn định đóng đợt này, không thay đổi</th></tr></thead><tbody id="tuitionBody"></tbody><tfoot id="tuitionFoot"></tfoot></table></div></section>
+      <section class="box"><h2>Học phí đã nộp trong kỳ</h2><div class="table-scroll"><table><thead><tr><th>STT</th><th>Học kỳ</th><th>Số tiền nộp</th><th>Ngày nộp</th><th>Ghi chú</th></tr></thead><tbody id="paymentBody"></tbody><tfoot id="paymentFoot"></tfoot></table></div></section>
+      <section class="box"><h2>Học phí sinh viên cần nộp:</h2><div class="table-scroll"><table><thead><tr><th>STT</th><th>Học kỳ</th><th>Số tiền cần nộp</th><th>Số tiền đã nộp qua ngân hàng</th><th>Thời gian nộp</th><th>Mã giao dịch</th><th>Ghi chú</th></tr></thead><tbody><tr class="empty-row"><td colspan="7"></td></tr></tbody></table></div></section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

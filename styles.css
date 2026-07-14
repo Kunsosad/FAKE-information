@@ -1,0 +1,57 @@
+:root{--blue:#4d90fe;--title:#075ee0;--head:#e9e9e9;--table-head:#eaf2f8;--line:#c5d7e6}
+*{box-sizing:border-box}
+html{font-family:Arial,sans-serif;color:#111;background:#fff}
+body{margin:0;font-size:16px;min-width:1180px}
+button,input,select,textarea{font:inherit}
+.masthead{height:102px;border-top:2px solid #333}
+.brand{width:1580px;max-width:calc(100% - 20px);height:100%;margin:auto;display:flex;align-items:center}
+.brand img{width:576px;height:86px;object-fit:contain}
+.topnav{height:43px;background:var(--blue);color:#fff}
+.nav-inner{width:1580px;max-width:calc(100% - 20px);height:43px;margin:auto;display:flex;align-items:center}
+.nav-button{height:43px;padding:0 18px;border:0;background:transparent;color:#fff;white-space:nowrap;cursor:pointer}
+.nav-button:hover{background:#197df2}
+.welcome{margin-left:30px;white-space:nowrap}
+.personal-menu{position:relative;height:43px}
+.personal-button{min-width:104px}
+.personal-menu:hover .personal-button,.personal-menu:focus-within .personal-button{height:36px;margin-top:3px;border-radius:8px;background:#fff;color:#111}
+.dropdown{display:none;position:absolute;z-index:10;top:43px;left:0;width:272px;background:var(--blue)}
+.personal-menu:hover .dropdown,.personal-menu:focus-within .dropdown{display:block}
+.dropdown button{display:block;width:100%;min-height:35px;padding:6px 16px;border:0;background:transparent;color:#fff;text-align:left;cursor:pointer}
+.dropdown button:hover,.dropdown button:focus{background:#197df2}
+main{padding:0 3px 10px}
+.view{display:none}
+.view.active{display:block}
+.page-title{height:58px;margin:0;display:flex;align-items:center;gap:10px;border-bottom:1px solid #bbb;color:var(--title);font-size:29px;letter-spacing:0}
+.page-icon{width:38px;height:38px;background:url("assets/Calendar.png") center/contain no-repeat}
+.box{margin:6px 5px 0;padding:5px;border:1px solid #bbb}
+.box h2{margin:0 0 2px;padding:8px 10px;background:var(--head);font-size:18px}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{height:34px;padding:5px 7px;border:1px solid var(--line);text-align:center;font-weight:400}
+th{background:var(--table-head);font-weight:700}
+td.text-left{text-align:left}
+.summary-table{min-width:1500px}
+.pink-note{margin:4px;color:#ff4081;font-size:14px;font-style:italic}
+.checks{display:flex;gap:12px;padding:5px}
+.checks input{width:20px;height:20px;vertical-align:middle}
+.certificate-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;padding:0 5px}
+.certificate-grid label{display:grid;grid-template-columns:225px 1fr;align-items:center;text-align:right}
+.certificate-grid input,.certificate-grid textarea{width:100%;border:1px solid #ccc;background:#f7f7f7}
+.certificate-grid input{height:27px}.certificate-grid textarea{height:56px;resize:none}
+.empty-row td{height:33px}
+.grades-table{min-width:1880px}
+.grades-table th:nth-child(1){width:50px}.grades-table th:nth-child(2){width:110px}.grades-table th:nth-child(3){width:80px}.grades-table th:nth-child(4){width:280px}.grades-table th:nth-child(5){width:310px}.grades-table th:nth-child(6){width:82px}.grades-table th:nth-child(7){width:225px}.grades-table th:nth-child(n+8){width:83px}
+.grades-table td.formula{line-height:19px}.survey-check{color:#4d79ff;font-size:25px;font-weight:700}.sub-check{color:#4d79ff;font-size:24px}.grades-table tbody tr.selected-row td{background:#fff!important}.grades-table tbody tr:hover td{background:#dff3fa!important}
+.profile-tabs{display:flex;margin:18px 10px 6px;padding:5px 5px 0;background:#e8e8e8;border:1px solid #ccc}
+.profile-tabs button{padding:10px 20px;border:1px solid #bbb;background:#f4f4f4;font-weight:700}.profile-tabs .active{background:#087ef5;color:#fff}
+.profile-layout{display:grid;grid-template-columns:210px 1fr;gap:22px;padding:4px 16px}
+.portrait{height:190px;display:grid;place-items:center;background:#f4f7fb;color:#1765d7;font-size:58px;font-weight:700}
+.field-grid{display:grid;grid-template-columns:repeat(3,minmax(260px,1fr));gap:7px 25px}.academic-grid{display:grid;grid-template-columns:repeat(2,minmax(350px,1fr));gap:7px 26px;padding:8px 235px}
+.field,.family-grid label{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:7px;text-align:right}.field input,.family-grid input{height:29px;width:100%;border:1px solid #999;background:#f5f5f5;padding:3px 6px}
+.family-box h3{margin:8px 4px;color:#243be7}.family-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 30px}
+.semester-bar{height:41px;padding:7px 5px;border-bottom:1px solid #bbb}.semester-bar select{width:315px;height:29px}.semester-bar button{width:125px;height:29px;margin-left:5px;border:0;background:var(--blue);color:#fff}
+.request-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 180px;padding:2px 145px}.request-grid label{display:grid;grid-template-columns:145px 320px;align-items:center;text-align:right;gap:7px}.request-grid input{height:27px;border:1px solid #ccc;background:#f5f5f5;padding:3px 6px}
+.red-warning{margin:2px;color:red;font-size:20px;font-weight:700}.installment{display:flex;align-items:center;gap:7px;margin-left:145px;color:#243be7;font-size:20px;font-weight:700}.installment select{height:30px;width:125px}
+.tuition-table{min-width:1400px}.tuition-table th:nth-child(2){width:175px}.tuition-table th:nth-child(3){width:315px}.tuition-table th:nth-child(4){width:58px}.tuition-table th:nth-child(6){width:100px}
+tfoot td{background:#f3efbf;font-weight:700}.money{text-align:right;white-space:nowrap}
+@media(max-width:720px){body{font-size:14px}.brand{margin-left:14px}.brand img{width:430px}.nav-inner{margin-left:0}.page-title{font-size:24px}.field-grid{grid-template-columns:repeat(2,minmax(250px,1fr))}.academic-grid{padding:8px 20px}.request-grid{padding:2px 20px;gap:20px}}
