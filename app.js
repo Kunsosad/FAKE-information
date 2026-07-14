@@ -135,7 +135,7 @@ function renderSummary(){
   const rows=semesters.map(semester=>{
     const stats=semesterStats(semester),old=fixedSummary.find(r=>r[0]===semester)||[];
     cumulativeCredits+=stats.attempted;cumulativePoints+=stats.points;
-    return[semester,stats.registered.toFixed(1),"",stats.gpa4.toFixed(2),stats.gpa10.toFixed(2),stats.gpa10.toFixed(2),rank(stats.gpa4),old[7]||"",old[8]||"",cumulativeCredits.toFixed(1),(cumulativePoints/cumulativeCredits).toFixed(2),old[11]||"79"];
+    return[semester,stats.registered.toFixed(1),"",stats.gpa4.toFixed(2),stats.gpa10.toFixed(2),stats.gpa10.toFixed(2),rank(stats.gpa4),old[7]||"82",old[8]||"",cumulativeCredits.toFixed(1),(cumulativePoints/cumulativeCredits).toFixed(2),old[11]||"79"];
   });
   document.getElementById("summaryBody").innerHTML=rows.map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join("")}</tr>`).join("");
 }
