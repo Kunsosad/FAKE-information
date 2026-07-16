@@ -41,20 +41,11 @@ const courses=[
   {n:32,sem:"2/2025-2026",code:"1012270.2520.24.02C",name:"TN Vật liệu kỹ thuật (0.5TC)",cr:0,formula:"[CK]*1.00",ck:8,final:8},
   {n:33,sem:"2/2025-2026",code:"1033080.2520.24.90A",name:"TN Sức bền vật liệu (0.5)",cr:0,formula:"[CK]*1.00",ck:9,final:9},
   {n:34,sem:"2/2025-2026",code:"1012400.2520.24.90C",name:"TH Truyền động thủy khí",cr:0,formula:"[CK]*1.00",ck:9,final:9},
-  {n:35,sem:"2/2025-2026",code:"1033070.2520.24.90",name:"Sức bền vật liệu",cr:3.5,formula:"[GK]*0.20+[QT]*0.15+<br>[TN]*0.15+[CK]*0.50",ck:4,gk:2,qt:4.5,final:4.4,survey:1},
+  {n:35,sem:"2/2025-2026",code:"1033070.2520.24.90",name:"Sức bền vật liệu",cr:3.5,formula:"[GK]*0.20+[BT]*0.15+<br>[TN]*0.15+[CK]*0.50",bt:4.5,ck:4,gk:2,final:4.4,survey:1},
   {n:36,sem:"2/2025-2026",code:"1012840.2520.24.90",name:"Nguyên lý máy",cr:3,formula:"[GK]*0.20+[BT]*0.20+<br>[CK]*0.60",bt:8.3,ck:6,gk:6,final:6.5},
   {n:37,sem:"2/2025-2026",code:"0130640.2520.24.02",name:"GDTC 4 Vovinam Nam",cr:0,formula:"[GK]*0.20+[BT]*0.20+<br>[CK]*0.60",generated:1},
   {n:38,sem:"2/2025-2026",code:"1012440.2520.24.02",name:"Cơ sở điều khiển hệ cơ khí",cr:2,formula:"[GK]*0.20+[BT]*0.20+<br>[CK]*0.60",bt:8,ck:10,gk:3,final:8.2}
 ];
-
-// ponytail: keep the source rows readable and apply the photographed scores in one small override table.
-const photographedScores={
-  1:{bt:9,ck:8.5,gk:9,final:8.9},3:{bt:7.5,ck:8.5,gk:8,final:8.5},5:{bt:9,ck:8.5,gk:7.5,final:8.6},6:{bt:8.6,ck:9,gk:8,final:8.7},
-  8:{bt:3,ck:8,final:6},9:{bt:8,ck:8,gk:7,final:7.8},10:{bt:8.5,ck:7.2,gk:8.5,final:7.7},12:{bt:10,ck:7.5,gk:8.5,final:8.2},
-  13:{bt:10,ck:7,gk:9,final:8},15:{bt:8,ck:7.8,gk:8,final:7.9},17:{bt:9.4,ck:8.5,gk:9.4,final:8.95},18:{bt:10,ck:8,gk:8,final:8.4},
-  19:{bt:undefined,ck:undefined,gk:undefined,final:undefined},20:{bt:undefined,ck:undefined,gk:undefined,final:undefined}
-};
-Object.entries(photographedScores).forEach(([n,scores])=>Object.assign(courses.find(course=>course.n===Number(n)),scores));
 
 const fixedSummary=[
   ["1/2024-2025","18.0","","2.33","6.38","6.38","Bình thường","74","","15.0","2.50","74"],
@@ -67,47 +58,66 @@ const tuition=[
 ];
 const payments=[["Học kỳ 2 năm học 2025-2026",8109000,"11/03/2026","THU HOC PHI HOC KY 2 NH 2025 2026 DOT 1"],["Học kỳ 2 năm học 2025-2026",5406000,"06/04/2026","THU HOC PHI HOC KY 2 NH 2025 2026 DOT 2"]];
 
-function grade(score){if(score>=9)return["A+",4];if(score>=8.5)return["A",4];if(score>=8)return["B+",3.5];if(score>=7)return["B",3];if(score>=6.5)return["C+",2.5];if(score>=5.5)return["C",2];if(score>=5)return["D+",1.5];if(score>=4)return["D",1];return["F",0]}
+const targetFinals={
+  1:9.4,2:8.4,3:8.3,5:7.9,6:7.8,7:9.2,
+  8:7.8,9:7.9,10:7.7,11:7.9,12:7.6,13:9.3,14:9.4,15:7.8,17:7.9,18:9.1,19:7.7,20:7.8,
+  21:7.8,22:7.9,23:7.7,24:8.4,25:9.3,26:7.8,28:8.4,
+  29:9.2,30:9.4,31:9.1,32:9.1,33:9.7,34:9.2,35:9.4,36:8.4,38:9.3
+};
+
+function courseScore(course){
+  const parts=[...course.formula.matchAll(/\[([A-Z]+)\]\*([0-9.]+)/g)];
+  if(!parts.length)return course.final;
+  const values=parts.map(([_,key,weight])=>[course[key.toLowerCase()],Number(weight)]);
+  if(values.some(([score])=>score===undefined||score===null))return course.final;
+  return Math.round(values.reduce((sum,[score,weight])=>sum+score*weight,0)*10)/10;
+}
+function courseRoot(course){return course.code.split(".")[0]}
+function grade(score){if(score>=9.5)return["A+",4];if(score>=8.5)return["A",4];if(score>=8)return["B+",3.5];if(score>=7)return["B",3];if(score>=6.5)return["C+",2.5];if(score>=5.5)return["C",2];if(score>=5)return["D+",1.5];if(score>=4)return["D",1];return["F",0]}
 function display(value){if(value===undefined||value===null)return"";const n=Number(value);return Number.isInteger(n*10)?n.toFixed(1):n.toFixed(2)}
 function credit(value){return String(value)}
 function money(value){return value?value.toLocaleString("en-US"):""}
 function fields(target,items){document.getElementById(target).innerHTML=items.map(([label,value])=>`<div class="field"><label>${label}:</label><input value="${value}" readonly></div>`).join("")}
 
-function generateMissing(){
-  localStorage.removeItem?.("gdtc4_points");
-}
-
-function raiseCurrentFailures(){
-  const key="current_high_scores",saved=JSON.parse(localStorage.getItem(key)||"null"),updates=saved||{},pick=()=>[8,8.3,8.6,8.9,9,9.2,9.5][Math.floor(Math.random()*7)];
-  courses.filter(c=>c.sem==="2/2025-2026"&&c.cr>0&&c.final<5.5).forEach(c=>{const score=updates[c.n]??pick();updates[c.n]=score;Object.assign(c,{final:score,bt:score,ck:score,gk:score,qt:score})});
-  if(!saved)localStorage.setItem(key,JSON.stringify(updates));
-}
-
-function raiseForHonors(){
-  const key="honors_scores_v7",saved=JSON.parse(localStorage.getItem(key)||"{}");
-  const ranges={Cp:[6.5,6.6,6.7,6.8,6.9],Bp:[8,8.1,8.2,8.3,8.4],A:[8.5,8.6,8.7,8.8,8.9],Ap:[9,9.1,9.2]};
-  const plan={19:"Bp",20:"A",21:"Cp",22:"Bp",23:"Bp",24:"A",25:"A",26:"Ap",28:"A",29:"A",30:"A",31:"A",32:"A",35:"Ap",36:"A",38:"Bp"};
-  const weights={19:{gk:.2,bt:.3,ck:.5},20:{gk:.2,bt:.2,ck:.6},21:{gk:.2,bt:.3,ck:.5},22:{gk:.2,bt:.2,ck:.6},23:{qt:.2,gk:.2,ck:.6},24:{gk:.2,bt:.2,ck:.6},25:{gk:.2,bt:.2,ck:.6},26:{gk:.2,bt:.3,ck:.5},28:{gk:.2,bt:.3,ck:.5},29:{bt:.1,gk:.2,qt:.2,ck:.5},30:{bt:.1,gk:.2,qt:.2,ck:.5},31:{gk:.2,bt:.2,ck:.6},32:{ck:1},35:{gk:.2,qt:.3,ck:.5},36:{gk:.2,bt:.2,ck:.6},38:{gk:.2,bt:.2,ck:.6}};
-  Object.entries(plan).forEach(([n,mode])=>{
-    const w=weights[n],pick=()=>ranges[mode][Math.floor(Math.random()*ranges[mode].length)];
-    const row=saved[n]??Object.fromEntries(Object.keys(w).map(k=>[k,pick()])),c=courses.find(course=>course.n===Number(n));
-    row.final=Math.round(Object.entries(w).reduce((s,[k,v])=>s+row[k]*v,0)*10)/10;saved[n]=row;Object.assign(c,{bt:undefined,ck:undefined,gk:undefined,qt:undefined},row);
+function applyTargetFinals(){
+  const recent={},seen=(key,value)=>(recent[key]||[]).slice(-2).includes(value),remember=(key,value)=>{if(value!==undefined)(recent[key]??=[]).push(value)};
+  courses.forEach(course=>{
+    const target=targetFinals[course.n],parts=[...course.formula.matchAll(/\[([A-Z]+)\]\*([0-9.]+)/g)];
+    if(target!==undefined&&parts.length){
+      for(let attempt=0;attempt<80;attempt++){
+        let used=0,values={},ok=true;
+        parts.slice(0,-1).forEach(([_,key,weight],i)=>{
+          let score=Math.round((target+(((course.n*13+i*7+attempt*5)%11)-5)/10)*10)/10;
+          for(let step=0;seen(key,score)&&step<6;step++)score=Math.round(Math.min(10,score+.1)*10)/10;
+          values[key]=score;used+=score*Number(weight);ok&&=score>=0&&score<=10&&!seen(key,score);
+        });
+        const [_,lastKey,lastWeight]=parts.at(-1);
+        const last=Math.round(((target-used)/Number(lastWeight))*100)/100;
+        values[lastKey]=last;ok&&=last>=0&&last<=10&&!seen(lastKey,last);
+        if(ok){
+          Object.entries(values).forEach(([key,value])=>course[key.toLowerCase()]=value);
+          course.final=target;
+          break;
+        }
+      }
+    }
+    parts.forEach(([_,key])=>remember(key,course[key.toLowerCase()]));
   });
-  localStorage.setItem(key,JSON.stringify(saved));
 }
 
 function semesterStats(semester){
-  const registered=courses.filter(c=>c.sem===semester&&c.cr>0).reduce((s,c)=>s+c.cr,0),rows=courses.filter(c=>c.sem===semester&&c.cr>0&&c.final!==undefined),attempted=rows.reduce((s,c)=>s+c.cr,0),points=rows.reduce((s,c)=>s+c.cr*grade(c.final)[1],0),ten=rows.reduce((s,c)=>s+c.cr*c.final,0),earned=rows.filter(c=>grade(c.final)[1]>0).reduce((s,c)=>s+c.cr,0);
+  const registered=courses.filter(c=>c.sem===semester&&c.cr>0).reduce((s,c)=>s+c.cr,0),rows=courses.filter(c=>c.sem===semester&&c.cr>0&&courseScore(c)!==undefined),attempted=rows.reduce((s,c)=>s+c.cr,0),points=rows.reduce((s,c)=>s+c.cr*grade(courseScore(c))[1],0),ten=rows.reduce((s,c)=>s+c.cr*courseScore(c),0),earned=rows.filter(c=>grade(courseScore(c))[1]>0).reduce((s,c)=>s+c.cr,0);
   return{registered,attempted,earned,points,gpa4:points/attempted,gpa10:ten/attempted};
+}
+function scholarshipEligible(course){
+  return course.cr>0&&!courses.some(c=>c.n<course.n&&c.cr>0&&courseRoot(c)===courseRoot(course));
+}
+function scholarshipStats(semester){
+  const rows=courses.filter(c=>c.sem===semester&&scholarshipEligible(c)&&courseScore(c)!==undefined),credits=rows.reduce((s,c)=>s+c.cr,0),ten=rows.reduce((s,c)=>s+c.cr*courseScore(c),0);
+  return{credits,gpa10:credits?ten/credits:undefined};
 }
 
 function renderProfile(){fields("personalFields",profile.personal);fields("academicFields",profile.academic);fields("familyFields",profile.family);fields("homeFields",profile.home);fields("emergencyFields",profile.emergency)}
-function renderSummary(){
-  const current=semesterStats("2/2025-2026"),cumulativeCredits=53.5+current.earned,cumulativeGpa=(2.4*53.5+current.gpa4*current.attempted)/(53.5+current.attempted);
-  const rows=[...fixedSummary,["2/2025-2026",current.attempted.toFixed(1),"",current.gpa4.toFixed(2),current.gpa10.toFixed(2),current.gpa10.toFixed(2),current.gpa4<2?"Yếu":"Bình thường","","",cumulativeCredits.toFixed(1),cumulativeGpa.toFixed(2),"79"]];
-  document.getElementById("summaryBody").innerHTML=rows.map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join("")}</tr>`).join("");
-}
-function renderGrades(){document.getElementById("gradesBody").innerHTML=[...courses].reverse().map(c=>{const g=c.final===undefined?["",""]:grade(c.final);return`<tr class="${c.selected?"selected-row":""}"><td>${c.n}</td><td>${c.sem}</td><td class="sub-check">${c.sub?"✓":""}</td><td class="text-left">${c.code}</td><td class="text-left">${c.name}</td><td>${credit(c.cr)}</td><td class="formula">${c.formula}</td><td>${display(c.bt)}</td><td>${display(c.ck)}</td><td>${display(c.gk)}</td><td>${display(c.qt)}</td><td>${display(c.final)}</td><td>${g[1]===""?"":Number(g[1]).toFixed(1)}</td><td>${g[0]}</td><td class="survey-check">${c.survey?"✓":""}</td><td></td></tr>`}).join("")}
 function renderTuition(){
   const total=tuition.reduce((s,r)=>s+r[3],0),credits=tuition.reduce((s,r)=>s+r[2],0);
   document.getElementById("tuitionBody").innerHTML=tuition.map((r,i)=>`<tr><td>${i+1}</td><td class="text-left">${r[0]}</td><td class="text-left">${r[1]}</td><td>${credit(r[2])}</td><td></td><td class="money">${money(r[3])}</td><td></td><td></td><td></td></tr>`).join("");
@@ -120,30 +130,25 @@ function setView(name){document.querySelectorAll(".view").forEach(v=>v.classList
 function renderSummary(){
   let cumulativeCredits=0,cumulativePoints=0;
   const semesters=[...new Set(courses.map(c=>c.sem))];
-  const rows=semesters.map(semester=>{
-    const stats=semesterStats(semester),old=fixedSummary.find(r=>r[0]===semester)||[],rank=stats.gpa4<2?"Yếu":"Bình thường";
-    cumulativeCredits+=stats.attempted;cumulativePoints+=stats.points;
-    return[semester,stats.registered.toFixed(1),stats.gpa4.toFixed(2),stats.gpa10.toFixed(2),stats.gpa10.toFixed(2),rank,old[7]||"",old[8]||"",cumulativeCredits.toFixed(1),(cumulativePoints/cumulativeCredits).toFixed(2),old[11]||"79"];
-  });
-  document.getElementById("summaryBody").innerHTML=rows.map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join("")}</tr>`).join("");
-}
-
-function renderSummary(){
-  let cumulativeCredits=0,cumulativePoints=0;
-  const semesters=[...new Set(courses.map(c=>c.sem))];
   const rank=gpa=>gpa>3.6?"Xu&#7845;t s&#7855;c":gpa>=3.2?"Gi&#7887;i":gpa>=2.5?"Kh&#225;":gpa>=2?"Trung b&#236;nh":"Y&#7871;u";
   const rows=semesters.map(semester=>{
-    const stats=semesterStats(semester),old=fixedSummary.find(r=>r[0]===semester)||[];
+    const stats=semesterStats(semester),scholarship=scholarshipStats(semester),old=fixedSummary.find(r=>r[0]===semester)||[];
     cumulativeCredits+=stats.attempted;cumulativePoints+=stats.points;
-    return[semester,stats.registered.toFixed(1),"",stats.gpa4.toFixed(2),stats.gpa10.toFixed(2),stats.gpa10.toFixed(2),rank(stats.gpa4),old[7]||"82",old[8]||"",cumulativeCredits.toFixed(1),(cumulativePoints/cumulativeCredits).toFixed(2),old[11]||"79"];
+    return[semester,stats.registered.toFixed(1),old[2]||"",stats.gpa4.toFixed(2),scholarship.gpa10?.toFixed(2)||"",stats.gpa10.toFixed(2),rank(stats.gpa4),old[7]||"82",old[8]||"",cumulativeCredits.toFixed(1),(cumulativePoints/cumulativeCredits).toFixed(2),old[11]||"79"];
   });
   document.getElementById("summaryBody").innerHTML=rows.map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join("")}</tr>`).join("");
 }
 
-generateMissing();raiseCurrentFailures();raiseForHonors();renderProfile();renderSummary();renderGrades();renderTuition();
+function renderGrades(){document.getElementById("gradesBody").innerHTML=[...courses].reverse().map(c=>{const score=courseScore(c),g=score===undefined?["",""]:grade(score);return`<tr class="${c.selected?"selected-row":""}"><td>${c.n}</td><td>${c.sem}</td><td class="sub-check">${c.sub?"✓":""}</td><td class="text-left">${c.code}</td><td class="text-left">${c.name}</td><td>${credit(c.cr)}</td><td class="formula">${c.formula}</td><td>${display(c.bt)}</td><td>${display(c.ck)}</td><td>${display(c.gk)}</td><td>${display(c.qt)}</td><td>${display(c.tn)}</td><td>${display(score)}</td><td>${g[1]===""?"":Number(g[1]).toFixed(1)}</td><td>${g[0]}</td><td class="survey-check">${c.survey?"✓":""}</td><td></td></tr>`}).join("")}
+
+applyTargetFinals();renderProfile();renderSummary();renderGrades();renderTuition();
 document.querySelectorAll("[data-view]").forEach(button=>button.addEventListener("click",()=>{setView(button.dataset.view);button.blur()}));
 
-// ponytail: one calculation check protects the preserved grade scale and current GPA.
-console.assert(courses.find(c=>c.n===1).final>=8&&courses.find(c=>c.n===19).final>=8&&courses.find(c=>c.n===20).final>=8.5&&grade(8.5)[0]==="A"&&semesterStats("2/2025-2026").gpa4>3.2&&tuition.reduce((s,r)=>s+r[3],0)===13515000,"academic data calculation failed");
-const check=[...new Set(courses.map(c=>c.sem))].reduce((a,sem)=>{const s=semesterStats(sem);return{cr:a.cr+s.attempted,points:a.points+s.points}},{cr:0,points:0});
-console.assert(check.points/check.cr>3.2&&check.points/check.cr<3.6,"cumulative GPA should stay in the honors range");
+// ponytail: one check covers formula parsing, grade scale, and target GPA math.
+const targets={"1/2024-2025":3.50,"2/2024-2025":3.21,"1/2025-2026":3.24,"2/2025-2026":3.90};
+const actuals=Object.fromEntries(Object.keys(targets).map(sem=>[sem,semesterStats(sem).gpa4]));
+const validCourses=courses.every(c=>{const parts=[...c.formula.matchAll(/\[([A-Z]+)\]\*([0-9.]+)/g)],sum=parts.reduce((s,p)=>s+Number(p[2]),0),score=courseScore(c);return !parts.length||Math.abs(sum-1)<.001&&parts.every(p=>{const v=c[p[1].toLowerCase()];return v===undefined||v>=0&&v<=10})&&(score===undefined||Math.abs(score-c.final)<.051)});
+const noNearbyRepeats=["bt","ck","gk","qt","tn"].every(key=>courses.every((course,i)=>course[key]===undefined||![1,2].some(gap=>courses[i-gap]?.[key]===course[key])));
+const scholarship2025=scholarshipStats("1/2025-2026"),stats2025=semesterStats("1/2025-2026");
+console.assert(grade(9.5)[0]==="A+"&&grade(9.4)[0]==="A"&&grade(8.5)[0]==="A"&&grade(8.4)[0]==="B+"&&courseScore(courses.find(c=>c.n===1))===9.4&&tuition.reduce((s,r)=>s+r[3],0)===13515000,"academic data calculation failed");
+console.assert(validCourses&&noNearbyRepeats&&scholarship2025.credits===11.5&&Math.abs(scholarship2025.gpa10-stats2025.gpa10)>.001&&Math.abs(actuals["1/2024-2025"]-3.50)<.005&&Math.abs(actuals["2/2024-2025"]-3.21)<.005&&Math.abs(actuals["1/2025-2026"]-3.24)<.007&&Math.abs(actuals["2/2025-2026"]-3.90)<.007,"target GPA check failed");

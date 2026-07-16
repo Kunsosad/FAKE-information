@@ -39,7 +39,7 @@ td.text-left{text-align:left}
 .certificate-grid input,.certificate-grid textarea{width:100%;border:1px solid #ccc;background:#f7f7f7}
 .certificate-grid input{height:27px}.certificate-grid textarea{height:56px;resize:none}
 .empty-row td{height:33px}
-.grades-table{min-width:1880px}
+.grades-table{min-width:1960px}
 .grades-table th:nth-child(1){width:50px}.grades-table th:nth-child(2){width:110px}.grades-table th:nth-child(3){width:80px}.grades-table th:nth-child(4){width:280px}.grades-table th:nth-child(5){width:310px}.grades-table th:nth-child(6){width:82px}.grades-table th:nth-child(7){width:225px}.grades-table th:nth-child(n+8){width:83px}
 .grades-table td.formula{line-height:19px}.survey-check{color:#4d79ff;font-size:25px;font-weight:700}.sub-check{color:#4d79ff;font-size:24px}.grades-table tbody tr.selected-row td{background:#fff!important}.grades-table tbody tr:hover td{background:#dff3fa!important}
 .profile-tabs{display:flex;margin:18px 10px 6px;padding:5px 5px 0;background:#e8e8e8;border:1px solid #ccc}
