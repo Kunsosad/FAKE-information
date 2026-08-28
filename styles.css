@@ -54,4 +54,69 @@ td.text-left{text-align:left}
 .red-warning{margin:2px;color:red;font-size:20px;font-weight:700}.installment{display:flex;align-items:center;gap:7px;margin-left:145px;color:#243be7;font-size:20px;font-weight:700}.installment select{height:30px;width:125px}
 .tuition-table{min-width:1400px}.tuition-table th:nth-child(2){width:175px}.tuition-table th:nth-child(3){width:315px}.tuition-table th:nth-child(4){width:58px}.tuition-table th:nth-child(6){width:100px}
 tfoot td{background:#f3efbf;font-weight:700}.money{text-align:right;white-space:nowrap}
+
+/* Login View Styles */
+.login-nav{background:linear-gradient(to bottom, #3b82f6, #1d64d8);height:32px;display:flex;align-items:center}
+.login-nav .nav-inner{display:flex;gap:15px;max-width:1200px;margin:0 auto;width:100%;padding:0 15px}
+.login-nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:600}
+.login-nav a.active, .login-nav a:hover{text-decoration:underline}
+
+.login-body{min-height:220px;background:#fff;display:flex;justify-content:flex-start;align-items:center;padding:40px 180px}
+.login-card-container{display:flex;align-items:center;gap:30px}
+.form-row-classic{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.form-row-classic label{width:80px;text-align:right;font-weight:700;font-size:14px;color:#333}
+.form-row-classic input{width:220px;height:28px;border:1px solid #aaa;padding:0 6px;border-radius:3px;font-size:14px}
+.classic-login-btn{height:28px;padding:0 16px;background:linear-gradient(to bottom, #e6e6e6, #cccccc);border:1px solid #999;border-radius:4px;font-weight:700;cursor:pointer;color:#333}
+.classic-login-btn:hover{background:#d4d4d4}
+
+.login-footer{background:#004098;color:#fff;padding:20px 0 0}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1300px;margin:0 auto;padding:0 20px 20px;font-size:12px;line-height:1.4}
+.footer-col p{margin:2px 0}
+.footer-col a{color:#fff;text-decoration:none}
+.footer-col a:hover{text-decoration:underline}
+.footer-copyright{background:#002966;text-align:center;padding:8px 0;font-size:12px;color:#e0e0e0}
+
+/* Schedule and Exam Tables */
+.schedule-table{min-width:1650px}
+.schedule-table th:nth-child(1){width:45px}
+.schedule-table th:nth-child(2){width:170px}
+.schedule-table th:nth-child(3){width:320px}
+.schedule-table th:nth-child(4){width:60px}
+.schedule-table th:nth-child(5){width:80px}
+.schedule-table td.icon-cell{color:#2f7cf6;font-size:16px;cursor:pointer}
+.exam-table{min-width:1400px}
+.exam-table th:nth-child(1){width:45px}
+.exam-table th:nth-child(2){width:190px}
+.exam-table th:nth-child(3){width:360px}
+
+/* Profile View Styling */
+.field-grid-3{display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:6px 20px}
+.academic-grid-2{display:grid;grid-template-columns:repeat(2,minmax(320px,1fr));gap:6px 25px;padding:12px 10px;margin-top:10px;border-top:1px solid #e0e0e0}
+.field-grid-3 .field, .academic-grid-2 .field{display:grid;grid-template-columns:160px 1fr;align-items:center;gap:6px;text-align:right}
+.field-grid-3 select, .field-grid-3 input, .academic-grid-2 input, .academic-grid-2 select{height:27px;width:100%;border:1px solid #aaa;background:#f7f7f7;padding:2px 6px;font-size:14px}
+.field-check{display:flex;align-items:center;margin-left:10px;font-size:14px}
+
+.address-section{margin-top:12px;padding:8px 10px;border-top:1px dashed #ccc}
+.address-note{color:#197df2;font-style:italic;font-size:13px;margin:2px 0 8px;font-weight:600}
+.address-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px}
+.address-grid .full-width{grid-column:span 2}
+.address-grid .field{display:grid;grid-template-columns:160px 1fr;align-items:center;gap:6px;text-align:right}
+.address-grid select, .address-grid input{height:27px;width:100%;border:1px solid #aaa;background:#f7f7f7;padding:2px 6px}
+
+.action-row{margin-top:10px;text-align:center}
+.btn-blue{height:30px;padding:0 20px;background:#197df2;color:#fff;border:none;border-radius:3px;font-weight:700;cursor:pointer}
+.btn-blue:hover{background:#0b63ce}
+.red-password-warning{color:red;font-weight:700;font-size:14px;margin:10px 0 4px;text-align:left}
+
+.blue-subhead{color:#243be7;margin:10px 4px 6px;font-size:16px}
+.family-form-grid{display:flex;flex-direction:column;gap:8px;padding:0 10px}
+.family-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;font-size:14px}
+.family-row .label{font-weight:600;min-width:140px;text-align:right;color:#333}
+.family-row .label-date{font-weight:600;margin-left:10px}
+.family-row input.input-name{width:220px;height:27px;border:1px solid #aaa;background:#f7f7f7;padding:2px 6px}
+.family-row select{height:27px;border:1px solid #aaa;background:#f7f7f7}
+.family-row .chk-label{display:flex;align-items:center;gap:4px;margin-left:8px;font-size:13px}
+
 @media(max-width:720px){body{font-size:14px}.brand{margin-left:14px}.brand img{width:430px}.nav-inner{margin-left:0}.page-title{font-size:24px}.field-grid{grid-template-columns:repeat(2,minmax(250px,1fr))}.academic-grid{padding:8px 20px}.request-grid{padding:2px 20px;gap:20px}}
+
+

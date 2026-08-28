@@ -10,53 +10,489 @@
 </head>
 <body>
   <header class="masthead"><div class="brand"><img src="assets/logo.png" alt="Hệ thống Thông tin Sinh viên"></div></header>
-  <nav class="topnav">
+  <nav class="topnav" id="topNav" style="display:none;">
     <div class="nav-inner">
       <div class="personal-menu">
         <button class="nav-button personal-button" type="button">Cá nhân</button>
         <div class="dropdown" role="menu">
           <button data-view="profile">Thông tin nhân thân</button>
-          <button>Khung Chương trình đào tạo</button>
-          <button>Lịch học, thi &amp; Khảo sát ý kiến</button>
+          <button data-view="curriculum">Khung Chương trình đào tạo</button>
+          <button data-view="schedule">Lịch học, thi &amp; Khảo sát ý kiến</button>
           <button data-view="tuition">Học phí</button>
           <button>Tự đánh giá rèn luyện</button>
           <button>Kết quả phục vụ cộng đồng</button>
           <button>Đồ án/ Luận văn tốt nghiệp</button>
           <button data-view="gpa">Kết quả học tập, rèn luyện</button>
-          <button data-view="gpa">Kết quả học tập học kỳ hiện tại</button>
+          <button data-view="currentTerm">Kết quả học tập học kỳ hiện tại</button>
           <button>Kê khai chương trình đào tạo</button>
         </div>
       </div>
-      <button class="nav-button">Lớp/ Đoàn/ Hội</button>
-      <button class="nav-button">Đăng ký</button>
+      <div class="personal-menu">
+        <button class="nav-button" type="button">Lớp/ Đoàn/ Hội</button>
+        <div class="dropdown" role="menu">
+          <button>Lớp - Cán bộ lớp đánh giá rèn luyện</button>
+          <button>Lớp - Kết quả đánh giá rèn luyện</button>
+        </div>
+      </div>
+      <div class="personal-menu">
+        <button class="nav-button" type="button">Đăng ký</button>
+        <div class="dropdown" role="menu">
+          <button data-view="insurance">Bảo hiểm y tế, bảo hiểm thân thể</button>
+          <button>Thi Anh văn định kỳ, chuẩn đầu ra</button>
+        </div>
+      </div>
       <button class="nav-button">Đề nghị Trường</button>
       <button class="nav-button">Phản ánh</button>
       <span class="welcome">Chào <strong>Phan Công Huy-24C1B (101240071)</strong></span>
-      <button class="nav-button">Thoát</button>
+      <button class="nav-button" id="logoutBtn" onclick="doLogout()">Thoát</button>
     </div>
   </nav>
 
   <main>
-    <section class="view" id="profileView">
-      <h1 class="page-title"><span class="page-icon"></span>Thông tin sinh viên</h1>
-      <div class="profile-tabs"><button class="active">Thông tin nhân thân &amp; ngành học</button><button>Đổi mật khẩu</button></div>
-      <section class="box profile-box">
-        <h2>Thông tin cá nhân:</h2>
-        <div class="profile-layout">
-          <div class="portrait"><span>PH</span></div>
-          <div class="field-grid" id="personalFields"></div>
+    <!-- LOGIN VIEW -->
+    <section class="view active" id="loginView">
+      <div class="login-nav">
+        <div class="nav-inner">
+          <a href="#" class="active">Trang chủ</a>
+          <a href="#">Chương trình</a>
+          <a href="#">Kế hoạch</a>
+          <a href="#">Danh sách</a>
+          <a href="#">Cựu sinh viên</a>
+          <a href="#">Phòng học &amp; Hệ thống</a>
+          <a href="#">Liên kết</a>
+          <a href="#">Hỗ trợ</a>
+          <a href="#">Đăng nhập</a>
         </div>
-        <div class="academic-grid" id="academicFields"></div>
+      </div>
+
+      <div class="login-body">
+        <div class="login-card-container">
+          <div class="key-icon-wrapper">
+            <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="45" cy="38" r="20" fill="#D97706"/>
+              <path d="M15 82C15 62 30 50 45 50C60 50 75 62 75 82V92H15V82Z" fill="#2563EB"/>
+              <circle cx="72" cy="52" r="11" fill="#F59E0B" stroke="#D97706" stroke-width="3"/>
+              <path d="M79 59L92 72M86 66L90 62M89 69L93 65" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <form class="login-form-classic" id="loginForm" onsubmit="return doLogin(event)">
+            <div class="form-row-classic">
+              <label for="username">Tài khoản:</label>
+              <input type="text" id="username" value="101240071" required>
+            </div>
+            <div class="form-row-classic">
+              <label for="password">Mật khẩu:</label>
+              <input type="password" id="password" value="••••••••" required>
+            </div>
+            <div class="form-row-classic btn-row">
+              <label></label>
+              <button type="submit" class="classic-login-btn">Đăng nhập</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <footer class="login-footer">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <p><strong>Phòng Tổ chức - Hành chính</strong></p>
+            <p>ĐC: Phòng S01.04</p>
+            <p>ĐT: 0236.3842308</p>
+            <p><a href="http://dut.udn.vn/Phong/TCHC" target="_blank">http://dut.udn.vn/Phong/TCHC</a></p>
+            <br>
+            <p><strong>Phòng Đào tạo</strong></p>
+            <p>ĐC: Phòng S05.07, S05.10</p>
+            <p>ĐT: 0236.3842145</p>
+            <p><a href="http://dut.udn.vn/Phong/DaoTao" target="_blank">http://dut.udn.vn/Phong/DaoTao</a></p>
+          </div>
+          <div class="footer-col">
+            <p><strong>Phòng Khoa học Công nghệ &amp; Hợp tác quốc tế</strong></p>
+            <p>ĐC: Phòng S06.02</p>
+            <p>ĐT: 0236.841292</p>
+            <p><a href="http://dut.udn.vn/Phong/KhoaHoc" target="_blank">http://dut.udn.vn/Phong/KhoaHoc</a></p>
+            <br>
+            <p><strong>Phòng Khảo thí và Đảm bảo chất lượng giáo dục</strong></p>
+            <p>ĐC: Phòng S06.03</p>
+            <p>ĐT: 0236.3737931</p>
+            <p><a href="http://dut.udn.vn/Phong/QualityAssurance" target="_blank">http://dut.udn.vn/Phong/QualityAssurance</a></p>
+          </div>
+          <div class="footer-col">
+            <p><strong>Phòng Công tác sinh viên</strong></p>
+            <p>ĐC: Phòng S06.08</p>
+            <p>ĐT: 0236.3738268</p>
+            <p><a href="http://dut.udn.vn/Phong/SinhVien" target="_blank">http://dut.udn.vn/Phong/SinhVien</a></p>
+            <br>
+            <p><strong>Phòng Kế hoạch - Tài chính</strong></p>
+            <p>ĐC: Phòng S03.11</p>
+            <p>ĐT: 0236.3841660</p>
+            <p><a href="http://dut.udn.vn/Phong/TaiChinh" target="_blank">http://dut.udn.vn/Phong/TaiChinh</a></p>
+          </div>
+          <div class="footer-col">
+            <p><strong>Phòng Cơ sở Vật chất</strong></p>
+            <p>ĐC: Phòng S03.02, S03.05</p>
+            <p>ĐT: 0236.3740719</p>
+            <p><a href="http://dut.udn.vn/Phong/VatChat" target="_blank">http://dut.udn.vn/Phong/VatChat</a></p>
+            <br>
+            <p><strong>Phòng Thanh tra - Pháp chế</strong></p>
+            <p>ĐC: Phòng S04.05</p>
+            <p>ĐT: 0236.3740718</p>
+            <p><a href="http://dut.udn.vn/Phong/ThanhTra" target="_blank">http://dut.udn.vn/Phong/ThanhTra</a></p>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          © 2014 - Trường Đại học Bách Khoa - Đại học Đà Nẵng
+        </div>
+      </footer>
+    </section>
+
+    <!-- SCHEDULE VIEW -->
+    <section class="view" id="scheduleView">
+      <h1 class="page-title"><span class="page-icon"></span>Lịch học, lịch thi cuối kỳ, lịch khảo sát ý kiến</h1>
+      <div class="semester-bar">
+        <select id="scheduleSemSelect">
+          <option value="2026-1">Học kỳ 1 năm học 2026-2027</option>
+        </select>
+        <button type="button">Dữ liệu</button>
+      </div>
+
+      <section class="box">
+        <h2>Lịch học</h2>
+        <div class="table-scroll">
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th rowspan="2">TT</th>
+                <th rowspan="2">Mã lớp học phần</th>
+                <th rowspan="2">Tên lớp học phần</th>
+                <th rowspan="2">Số TC</th>
+                <th rowspan="2">Tích hợp</th>
+                <th colspan="4">Thông tin lớp học phần</th>
+                <th rowspan="2">Đề cương</th>
+                <th rowspan="2">Công thức điểm</th>
+                <th rowspan="2">DSSV</th>
+                <th rowspan="2">Học lại</th>
+                <th colspan="4">Khảo sát ý kiến cuối học kỳ</th>
+              </tr>
+              <tr>
+                <th>CLC</th>
+                <th>Giảng viên</th>
+                <th>Thời khóa biểu</th>
+                <th>Tuần học</th>
+                <th>Bắt đầu</th>
+                <th>Kết thúc</th>
+                <th>Hạn hiển điểm</th>
+                <th>Hoàn thành</th>
+              </tr>
+            </thead>
+            <tbody id="scheduleBody"></tbody>
+            <tfoot id="scheduleFoot"></tfoot>
+          </table>
+        </div>
       </section>
-      <section class="box family-box">
-        <h2>Thông tin nhân thân:</h2>
-        <h3>Gia đình:</h3><div class="family-grid" id="familyFields"></div>
-        <h3>Thường trú gia đình:</h3><div class="family-grid" id="homeFields"></div>
-        <h3>Khi khẩn cấp, Trường báo tin cho người thân theo thông tin liên hệ sau đây:</h3><div class="family-grid" id="emergencyFields"></div>
+
+      <section class="box" style="margin-top: 10px;">
+        <h2>Lịch thi</h2>
+        <div class="table-scroll">
+          <table class="exam-table">
+            <thead>
+              <tr>
+                <th>TT</th>
+                <th>Mã lớp học phần</th>
+                <th>Tên lớp học phần</th>
+                <th>Nhóm thi</th>
+                <th>Thi chung</th>
+                <th>Lịch thi cuối kỳ (Ngày; phòng; giờ/xuất thi)</th>
+              </tr>
+            </thead>
+            <tbody id="examBody"></tbody>
+          </table>
+        </div>
       </section>
     </section>
 
-    <section class="view active" id="gpaView">
+    <section class="view" id="profileView">
+      <h1 class="page-title"><span class="page-icon"></span>Thông tin sinh viên</h1>
+      <div class="profile-tabs">
+        <button class="active">Thông tin nhân thân &amp; ngành học</button>
+        <button>Đổi mật khẩu</button>
+      </div>
+
+      <section class="box profile-box">
+        <h2>Thông tin cá nhân:</h2>
+        <div class="profile-layout">
+          <div class="portrait" style="grid-row:span 2">
+            <img src="assets/avatar.jpg" alt="PHAN CÔNG HUY" style="width:115px;height:145px;border:1px solid #ccc;object-fit:cover;border-radius:2px">
+          </div>
+          <div class="field-grid-3">
+            <div class="field"><label>Họ tên:</label><input value="PHAN CÔNG HUY" readonly></div>
+            <div class="field"><label>Ngày sinh:</label><input value="04/08/2006" readonly></div>
+            <div class="field"><label>Nơi sinh:</label><select disabled><option>Đà Nẵng</option></select></div>
+
+            <div class="field"><label>Giới tính:</label><input value="Nam" readonly></div>
+            <div class="field"><label>Dân tộc:</label><select><option>Kinh</option></select></div>
+            <div class="field"><label>Quốc tịch:</label><select><option>Việt Nam</option></select></div>
+
+            <div class="field"><label>Số CCCD:</label><input value="049206000454" readonly></div>
+            <div class="field"><label>Ngày cấp CCCD:</label><input value="13/04/2021" readonly></div>
+            <div class="field"><label>Nơi sinh cũ:</label><select><option>Tỉnh Quảng Nam</option></select></div>
+
+            <div class="field"><label>Tôn giáo:</label><select><option>Không</option></select></div>
+            <div class="field"><label>Tài khoản cá nhân:</label><input value=""></div>
+            <div class="field"><label>Tại ngân hàng:</label><input value=""></div>
+
+            <div class="field"><label>Mã thẻ BHYT:</label><input value=""></div>
+            <div class="field"><label>Hiệu lực đến ngày:</label><input value=""></div>
+            <div class="field-check"><label><input type="checkbox"> Diện được cấp thẻ miễn phí</label></div>
+          </div>
+        </div>
+
+        <div class="academic-grid-2">
+          <div class="field"><label>Ngành:</label><input value="Công nghệ chế tạo máy" readonly></div>
+          <div class="field"><label>Lớp:</label><input value="24C1B" readonly></div>
+          <div class="field"><label>Chương trình đào tạo:</label><input value="Công nghệ chế tạo máy K2024_ Kỹ sư" readonly></div>
+          <div class="field"><label>Chương trình 2:</label><input value="" readonly></div>
+          <div class="field"><label>Tài khoản Office365 Trường cấp:</label><input value="101240071@sv1.dut.udn.vn" readonly></div>
+          <div class="field"><label>Email cá nhân:</label><input value="phanconghuytienganh@gmail.com"></div>
+          <div class="field"><label>Mật khẩu ban đầu ở Office365:</label><input value="W157799829240cm" readonly></div>
+          <div class="field"><label>Facebook:</label><input value="Phan Công Huy"></div>
+          <div class="field"><label>Điện thoại:</label><input value="0987520146" readonly></div>
+          <div class="field"><label>Điện thoại gia đình:</label><input value="0399396045" readonly></div>
+        </div>
+
+        <div class="address-section">
+          <p class="address-note">Địa chỉ cư trú: cần nhập thông tin cụ thể Số nhà, Đường (hoặc Xóm, Thôn), tên phải viết hoa ký tự đầu. KHÔNG NHẬP PHƯỜNG, THÀNH PHỐ</p>
+          <div class="address-grid">
+            <div class="field full-width"><label>Địa chỉ cư trú hiện nay:</label><input value="Xã Đại Hiệp huyện Đại Lộc tỉnh Quảng Nam"></div>
+            <div class="field"><label>Là địa chỉ của:</label><select><option>Gia đình</option></select></div>
+            <div class="field"><label>Tỉnh/ Thành phố:</label><select><option>Tp Đà Nẵng</option></select></div>
+            <div class="field"><label>Xã/ Phường:</label><select><option>Xã Đại Lộc</option></select></div>
+          </div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn-blue" type="button">Lưu thông tin cá nhân</button>
+        </div>
+        <p class="red-password-warning">Bạn đã đặt mật khẩu cách đây 147 ngày. Bạn cần đặt lại ĐỂ TRUY CẬP ĐẦY ĐỦ CHỨC NĂNG CỦA HỆ THỐNG.</p>
+      </section>
+
+      <section class="box family-box">
+        <h2>Thông tin nhân thân:</h2>
+        <h3 class="blue-subhead">Gia đình:</h3>
+        <div class="family-form-grid">
+          <div class="family-row">
+            <span class="label">Mẹ: Họ và tên mẹ:</span>
+            <input value="Nguyễn Thị Cẩm Vân" class="input-name">
+            <span class="label-date">Ngày sinh mẹ:</span>
+            <select class="sel-day"><option selected>26</option></select>
+            <select class="sel-month"><option selected>3</option></select>
+            <select class="sel-year"><option selected>1983</option></select>
+            <label class="chk-label"><input type="checkbox"> Có bằng Đại học/Cao đẳng</label>
+            <label class="chk-label"><input type="checkbox"> Không có mẹ</label>
+          </div>
+          <div class="family-row">
+            <span class="label">Cha: Họ và tên cha:</span>
+            <input value="Phan Công Hào" class="input-name">
+            <span class="label-date">Ngày sinh cha:</span>
+            <select class="sel-day"><option selected>16</option></select>
+            <select class="sel-month"><option selected>8</option></select>
+            <select class="sel-year"><option selected>1978</option></select>
+            <label class="chk-label"><input type="checkbox"> Có bằng Đại học/Cao đẳng</label>
+            <label class="chk-label"><input type="checkbox"> Không có cha</label>
+          </div>
+        </div>
+
+        <h3 class="blue-subhead">Thường trú gia đình:</h3>
+        <div class="family-row">
+          <span class="label">Số nhà, đường:</span>
+          <input value="DT609" class="input-name">
+          <span class="label">Tỉnh/ Thành phố:</span>
+          <select><option>Tp Đà Nẵng</option></select>
+          <span class="label">Xã/ Phường:</span>
+          <select><option>Xã Đại Lộc</option></select>
+        </div>
+
+        <h3 class="blue-subhead">Khi khẩn cấp, Trường báo tin cho người thân theo thông tin liên hệ sau đây:</h3>
+        <div class="family-row">
+          <span class="label">Họ tên/ Quan hệ:</span>
+          <input value="Nguyễn Thị Cẩm Vân" class="input-name">
+          <span class="label">Số điện thoại:</span>
+          <input value="0399396045" style="width:140px">
+          <span class="label">Địa chỉ:</span>
+          <input value="DT609" style="width:200px">
+        </div>
+
+        <h3 class="blue-subhead">Thông tin liên hệ sau khi tốt nghiệp:</h3>
+        <div class="family-row">
+          <span class="label">Họ tên/ Địa chỉ:</span>
+          <input value="Phan Công Huy" style="width:350px">
+        </div>
+
+        <div class="action-row" style="margin-top:15px">
+          <button class="btn-blue" type="button">Lưu thông tin nhân thân</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- CURRICULUM VIEW -->
+    <section class="view" id="curriculumView">
+      <h1 class="page-title"><span class="page-icon"></span>Chương trình đào tạo</h1>
+
+      <section class="box">
+        <h2>Chương trình đào tạo:</h2>
+        <div class="table-scroll">
+          <table class="curriculum-summary-table" style="width:100%">
+            <thead>
+              <tr>
+                <th>Mã chương trình</th>
+                <th>Tên chương trình đào tạo</th>
+                <th>Số học kỳ</th>
+                <th>Tổng số tín chỉ yêu cầu</th>
+                <th>Số tín chỉ bắt buộc</th>
+                <th>Số tín chỉ tự chọn</th>
+                <th>Mã ngành</th>
+                <th>Tên ngành</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1013023</td>
+                <td class="text-left">Công nghệ chế tạo máy K2024_ Kỹ sư</td>
+                <td>10</td>
+                <td>180</td>
+                <td>168</td>
+                <td>12</td>
+                <td>7510202</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="box" style="margin-top: 10px;">
+        <h2>Chi tiết Khung chương trình &amp; Tiến độ, kết quả học tập</h2>
+        <div class="table-scroll">
+          <table class="curriculum-detail-table" style="min-width:1800px">
+            <thead>
+              <tr>
+                <th rowspan="2" style="width:35px">TT</th>
+                <th rowspan="2" style="width:40px">Học kỳ</th>
+                <th rowspan="2" style="width:55px">Ký hiệu</th>
+                <th rowspan="2" style="width:80px">Mã HP</th>
+                <th rowspan="2" style="width:280px">Tên học phần</th>
+                <th rowspan="2" style="width:45px">Số tín chỉ</th>
+                <th rowspan="2" style="width:40px">Tự chọn</th>
+                <th rowspan="2" style="width:35px">HT ĐA</th>
+                <th rowspan="2" style="width:35px">TQ ĐA</th>
+                <th rowspan="2" style="width:45px">Điểm học</th>
+                <th rowspan="2" style="width:45px">Điểm chuyển</th>
+                <th rowspan="2" style="width:140px">Đăng ký được?</th>
+                <th colspan="3">Quan hệ và trình tự học với các học phần khác:</th>
+                <th rowspan="2" style="width:110px">Ghi chú</th>
+              </tr>
+              <tr>
+                <th style="width:230px">Học phần cần học trước:</th>
+                <th style="width:230px">Học song hành với học phần:</th>
+                <th style="width:230px">Cần học phần tiên quyết:</th>
+              </tr>
+            </thead>
+            <tbody id="curriculumBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- INSURANCE VIEW -->
+    <section class="view" id="insuranceView">
+      <h1 class="page-title"><span class="page-icon"></span>Đăng ký bảo hiểm y tế, bảo hiểm thân thể</h1>
+      <div class="semester-bar" style="height:auto;padding:8px">
+        <label style="font-weight:600">Mã bảo hiểm cá nhân: </label>
+        <input type="text" style="height:28px;width:200px;border:1px solid #ccc;padding:0 6px;margin:0 5px">
+        <button type="button" class="btn-blue" style="height:28px;padding:0 15px">Lưu</button>
+        <span class="red-warning" style="font-size:14px;margin-left:10px;font-weight:700">Xảy ra lỗi vui lòng thử lại</span>
+      </div>
+
+      <section class="box">
+        <h2>Đăng ký tham gia bảo hiểm thân thể</h2>
+        <div class="table-scroll">
+          <table style="min-width:1400px">
+            <thead>
+              <tr>
+                <th rowspan="2">STT</th>
+                <th colspan="4">Thông tin về bảo hiểm</th>
+                <th colspan="2">Hiệu lực</th>
+                <th colspan="2">Lịch đăng ký</th>
+                <th colspan="2">Lịch đóng phí</th>
+                <th rowspan="2">Hủy</th>
+                <th rowspan="2">Đăng ký</th>
+                <th rowspan="2">Sinh viên đăng ký (Đã đăng ký lúc)</th>
+              </tr>
+              <tr>
+                <th>Mã hiệu</th>
+                <th>Loại, Tên bảo hiểm</th>
+                <th>Bắt buộc</th>
+                <th>Phí (đ)</th>
+                <th>Bắt đầu</th>
+                <th>Hết hiệu lực</th>
+                <th>Bắt đầu</th>
+                <th>Kết thúc</th>
+                <th>Bắt đầu</th>
+                <th>Kết thúc</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>BHTT-25-26 (L2)</td>
+                <td class="text-left">Bảo hiểm thân thể - 01/11/2025 đến 31/10/2026</td>
+                <td>100 000</td>
+                <td class="money">100 000</td>
+                <td>01/11/2025</td>
+                <td>31/10/2026</td>
+                <td>12:00 24/10/2025</td>
+                <td>11:59 05/11/2025</td>
+                <td>01:00 10/11/2025</td>
+                <td>00:30 14/11/2025</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="box" style="margin-top:10px">
+        <h2>Danh sách bảo hiểm y tế, bảo hiểm thân thể đã tham gia</h2>
+        <div class="table-scroll">
+          <table style="min-width:1400px">
+            <thead>
+              <tr>
+                <th rowspan="2">STT</th>
+                <th rowspan="2">Mã hiệu</th>
+                <th rowspan="2">Loại, Tên bảo hiểm</th>
+                <th colspan="6">Trường tổ chức đăng ký &amp; thu phí</th>
+                <th rowspan="2">Sinh viên tự khai đã có bảo hiểm y tế</th>
+              </tr>
+              <tr>
+                <th>Bắt buộc</th>
+                <th>Phí (đ)</th>
+                <th>Hiệu lực từ ngày</th>
+                <th>Hết hiệu lực ngày</th>
+                <th>Ngày đăng ký</th>
+                <th>Ngày nộp phí</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="empty-row"><td colspan="10"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" id="gpaView">
       <h1 class="page-title"><span class="page-icon"></span>Kết quả học tập và rèn luyện đạo đức</h1>
       <section class="box">
         <h2>Tổng hợp kết quả học tập và rèn luyện đạo đức</h2>
@@ -81,9 +517,50 @@
       </section>
     </section>
 
+    <!-- CURRENT TERM GRADES VIEW -->
+    <section class="view" id="currentTermView">
+      <h1 class="page-title"><span class="page-icon"></span>Kết quả học tập học kỳ</h1>
+      <section class="box grades-box">
+        <h2>Chi tiết kết quả học tập các học kỳ</h2>
+        <div class="table-scroll">
+          <table class="grades-table current-term-table">
+            <thead>
+              <tr>
+                <th style="width:50px">TT</th>
+                <th style="width:180px">Mã lớp học phần</th>
+                <th style="width:310px">Tên lớp học phần</th>
+                <th style="width:70px">Số TC</th>
+                <th style="width:280px">Công thức điểm</th>
+                <th>Bài tập</th>
+                <th>Giữa kỳ</th>
+                <th>Thí nghiệm</th>
+                <th>Quá trình</th>
+                <th>Đánh giá</th>
+                <th>Thi</th>
+                <th>Thang 10</th>
+                <th>Thang 4</th>
+                <th>Chữ</th>
+              </tr>
+            </thead>
+            <tbody id="currentTermBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
     <section class="view" id="tuitionView">
       <h1 class="page-title"><span class="page-icon"></span>Học phí</h1>
-      <div class="semester-bar"><select><option>Học kỳ 2 năm học 2025-2026</option></select><button>Dữ liệu</button></div>
+      <div class="semester-bar">
+        <select id="tuitionSemSelect" onchange="renderTuition()">
+          <option value="2026-1" selected>Học kỳ 1 năm học 2026-2027</option>
+          <option value="2025-2">Học kỳ 2 năm học 2025-2026</option>
+          <option value="2025-1">Học kỳ 1 năm học 2025-2026</option>
+          <option value="2024-3">Học kỳ Hè năm học 2024-2025</option>
+          <option value="2024-2">Học kỳ 2 năm học 2024-2025</option>
+          <option value="2024-1">Học kỳ 1 năm học 2024-2025</option>
+        </select>
+        <button type="button">Dữ liệu</button>
+      </div>
       <section class="box tuition-request">
         <h2>Lập đơn đề nghị hoãn đóng học phí Học kỳ 1 / Năm học 2025 - 2026</h2>
         <div class="request-grid"><label>Họ tên: <input value="Phan Công Huy" readonly></label><label>Số thẻ SV: <input value="101240071" readonly></label><label>Điện thoại: <input value="0987520146" readonly></label><label>Lớp: <input value="24C1B" readonly></label></div>
@@ -92,7 +569,7 @@
       </section>
       <section class="box"><h2>Học phí lớp học phần</h2><div class="table-scroll"><table class="tuition-table"><thead><tr><th>STT</th><th>Mã lớp học phần</th><th>Tên lớp học phần</th><th>Số TC</th><th>CLC</th><th>Học phí</th><th>Học lại</th><th>Đăng ký<br>đóng ở đợt</th><th>Ấn định đóng đợt này, không thay đổi</th></tr></thead><tbody id="tuitionBody"></tbody><tfoot id="tuitionFoot"></tfoot></table></div></section>
       <section class="box"><h2>Học phí đã nộp trong kỳ</h2><div class="table-scroll"><table><thead><tr><th>STT</th><th>Học kỳ</th><th>Số tiền nộp</th><th>Ngày nộp</th><th>Ghi chú</th></tr></thead><tbody id="paymentBody"></tbody><tfoot id="paymentFoot"></tfoot></table></div></section>
-      <section class="box"><h2>Học phí sinh viên cần nộp:</h2><div class="table-scroll"><table><thead><tr><th>STT</th><th>Học kỳ</th><th>Số tiền cần nộp</th><th>Số tiền đã nộp qua ngân hàng</th><th>Thời gian nộp</th><th>Mã giao dịch</th><th>Ghi chú</th></tr></thead><tbody><tr class="empty-row"><td colspan="7"></td></tr></tbody></table></div></section>
+      <section class="box"><h2>Học phí sinh viên cần nộp:</h2><div class="table-scroll"><table><thead><tr><th>STT</th><th>Học kỳ</th><th>Số tiền cần nộp</th><th>Số tiền đã nộp qua ngân hàng</th><th>Thời gian nộp</th><th>Mã giao dịch</th><th>Ghi chú</th></tr></thead><tbody id="dueBody"><tr class="empty-row"><td colspan="7"></td></tr></tbody></table></div></section>
     </section>
   </main>
   <script src="app.js"></script>
