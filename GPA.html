@@ -19,30 +19,30 @@
           <button data-view="curriculum">Khung Chương trình đào tạo</button>
           <button data-view="schedule">Lịch học, thi &amp; Khảo sát ý kiến</button>
           <button data-view="tuition">Học phí</button>
-          <button>Tự đánh giá rèn luyện</button>
-          <button>Kết quả phục vụ cộng đồng</button>
-          <button>Đồ án/ Luận văn tốt nghiệp</button>
+          <button data-view="selfEval">Tự đánh giá rèn luyện</button>
+          <button data-view="community">Kết quả phục vụ cộng đồng</button>
+          <button data-view="thesis">Đồ án/ Luận văn tốt nghiệp</button>
           <button data-view="gpa">Kết quả học tập, rèn luyện</button>
           <button data-view="currentTerm">Kết quả học tập học kỳ hiện tại</button>
-          <button>Kê khai chương trình đào tạo</button>
+          <button data-view="curriculumDeclare">Kê khai chương trình đào tạo</button>
         </div>
       </div>
       <div class="personal-menu">
         <button class="nav-button" type="button">Lớp/ Đoàn/ Hội</button>
         <div class="dropdown" role="menu">
-          <button>Lớp - Cán bộ lớp đánh giá rèn luyện</button>
-          <button>Lớp - Kết quả đánh giá rèn luyện</button>
+          <button data-view="classEval">Lớp - Cán bộ lớp đánh giá rèn luyện</button>
+          <button data-view="classResult">Lớp - Kết quả đánh giá rèn luyện</button>
         </div>
       </div>
       <div class="personal-menu">
         <button class="nav-button" type="button">Đăng ký</button>
         <div class="dropdown" role="menu">
           <button data-view="insurance">Bảo hiểm y tế, bảo hiểm thân thể</button>
-          <button>Thi Anh văn định kỳ, chuẩn đầu ra</button>
+          <button data-view="engExam">Thi Anh văn định kỳ, chuẩn đầu ra</button>
         </div>
       </div>
-      <button class="nav-button">Đề nghị Trường</button>
-      <button class="nav-button">Phản ánh</button>
+      <button class="nav-button" data-view="request">Đề nghị Trường</button>
+      <button class="nav-button" data-view="feedback">Phản ánh</button>
       <span class="welcome">Chào <strong>Phan Công Huy-24C1B (101240071)</strong></span>
       <button class="nav-button" id="logoutBtn" onclick="doLogout()">Thoát</button>
     </div>
@@ -53,15 +53,15 @@
     <section class="view active" id="loginView">
       <div class="login-nav">
         <div class="nav-inner">
-          <a href="#" class="active">Trang chủ</a>
-          <a href="#">Chương trình</a>
-          <a href="#">Kế hoạch</a>
-          <a href="#">Danh sách</a>
-          <a href="#">Cựu sinh viên</a>
-          <a href="#">Phòng học &amp; Hệ thống</a>
-          <a href="#">Liên kết</a>
-          <a href="#">Hỗ trợ</a>
-          <a href="#">Đăng nhập</a>
+          <a href="javascript:void(0)" class="active">Trang chủ</a>
+          <a href="javascript:void(0)">Chương trình</a>
+          <a href="javascript:void(0)">Kế hoạch</a>
+          <a href="javascript:void(0)">Danh sách</a>
+          <a href="javascript:void(0)">Cựu sinh viên</a>
+          <a href="javascript:void(0)">Phòng học &amp; Hệ thống</a>
+          <a href="javascript:void(0)">Liên kết</a>
+          <a href="javascript:void(0)">Hỗ trợ</a>
+          <a href="javascript:void(0)">Đăng nhập</a>
         </div>
       </div>
 
@@ -214,8 +214,8 @@
     <section class="view" id="profileView">
       <h1 class="page-title"><span class="page-icon"></span>Thông tin sinh viên</h1>
       <div class="profile-tabs">
-        <button class="active">Thông tin nhân thân &amp; ngành học</button>
-        <button>Đổi mật khẩu</button>
+        <button class="active" data-profile-tab="info">Thông tin nhân thân &amp; ngành học</button>
+        <button data-profile-tab="password">Đổi mật khẩu</button>
       </div>
 
       <section class="box profile-box">
@@ -571,6 +571,376 @@
       <section class="box"><h2>Học phí đã nộp trong kỳ</h2><div class="table-scroll"><table><thead><tr><th>STT</th><th>Học kỳ</th><th>Số tiền nộp</th><th>Ngày nộp</th><th>Ghi chú</th></tr></thead><tbody id="paymentBody"></tbody><tfoot id="paymentFoot"></tfoot></table></div></section>
       <section class="box"><h2>Học phí sinh viên cần nộp:</h2><div class="table-scroll"><table><thead><tr><th>STT</th><th>Học kỳ</th><th>Số tiền cần nộp</th><th>Số tiền đã nộp qua ngân hàng</th><th>Thời gian nộp</th><th>Mã giao dịch</th><th>Ghi chú</th></tr></thead><tbody id="dueBody"><tr class="empty-row"><td colspan="7"></td></tr></tbody></table></div></section>
     </section>
+
+    <!-- SELF EVALUATION VIEW -->
+    <section class="view" id="selfEvalView">
+      <h1 class="page-title"><span class="page-icon"></span>Tự đánh giá rèn luyện</h1>
+      <div class="semester-bar">
+        <select>
+          <option selected>Học kỳ 2 năm học 2025-2026</option>
+          <option>Học kỳ 1 năm học 2025-2026</option>
+          <option>Học kỳ 2 năm học 2024-2025</option>
+          <option>Học kỳ 1 năm học 2024-2025</option>
+        </select>
+        <button type="button">Dữ liệu</button>
+      </div>
+      <section class="box">
+        <h2>Thông tin sinh viên</h2>
+        <div style="padding:8px 10px;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px">
+          <div class="field"><label>Họ tên:</label><input value="PHAN CÔNG HUY" readonly></div>
+          <div class="field"><label>Lớp:</label><input value="24C1B" readonly></div>
+          <div class="field"><label>MSSV:</label><input value="101240071" readonly></div>
+          <div class="field"><label>Ngành:</label><input value="Công nghệ chế tạo máy" readonly></div>
+        </div>
+      </section>
+      <section class="box" style="margin-top:10px">
+        <h2>Bảng tự đánh giá kết quả rèn luyện - Học kỳ 2 năm học 2025-2026</h2>
+        <div class="table-scroll">
+          <table style="min-width:1200px">
+            <thead>
+              <tr><th style="width:40px">TT</th><th>Nội dung đánh giá</th><th style="width:100px">Điểm tối đa</th><th style="width:100px">SV tự đánh giá</th><th style="width:100px">Lớp đánh giá</th><th style="width:100px">Khoa đánh giá</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>I</td><td class="text-left" style="font-weight:700">Đánh giá về ý thức tham gia học tập</td><td>20</td><td>18</td><td>17</td><td>17</td></tr>
+              <tr><td>1</td><td class="text-left">Ý thức và thái độ trong học tập</td><td>10</td><td>9</td><td>8</td><td>8</td></tr>
+              <tr><td>2</td><td class="text-left">Ý thức và thái độ tham gia các câu lạc bộ học thuật, hoạt động khoa học</td><td>10</td><td>9</td><td>9</td><td>9</td></tr>
+              <tr><td>II</td><td class="text-left" style="font-weight:700">Đánh giá về ý thức chấp hành nội quy, quy chế</td><td>25</td><td>22</td><td>21</td><td>21</td></tr>
+              <tr><td>3</td><td class="text-left">Ý thức chấp hành các văn bản chỉ đạo của ngành, cơ sở</td><td>15</td><td>13</td><td>13</td><td>13</td></tr>
+              <tr><td>4</td><td class="text-left">Ý thức trong việc thi cử</td><td>10</td><td>9</td><td>8</td><td>8</td></tr>
+              <tr><td>III</td><td class="text-left" style="font-weight:700">Đánh giá về ý thức tham gia hoạt động chính trị - xã hội</td><td>20</td><td>16</td><td>16</td><td>16</td></tr>
+              <tr><td>5</td><td class="text-left">Ý thức và kết quả tham gia các hoạt động rèn luyện về chính trị</td><td>10</td><td>8</td><td>8</td><td>8</td></tr>
+              <tr><td>6</td><td class="text-left">Ý thức và kết quả tham gia các hoạt động xã hội, văn hóa, văn nghệ, thể thao</td><td>10</td><td>8</td><td>8</td><td>8</td></tr>
+              <tr><td>IV</td><td class="text-left" style="font-weight:700">Đánh giá về ý thức công dân trong quan hệ cộng đồng</td><td>25</td><td>22</td><td>20</td><td>20</td></tr>
+              <tr><td>7</td><td class="text-left">Ý thức chấp hành và tham gia tuyên truyền phòng chống tội phạm và tệ nạn XH</td><td>15</td><td>13</td><td>12</td><td>12</td></tr>
+              <tr><td>8</td><td class="text-left">Ý thức tham gia giữ gìn và bảo vệ môi trường</td><td>10</td><td>9</td><td>8</td><td>8</td></tr>
+              <tr><td>V</td><td class="text-left" style="font-weight:700">Đánh giá về ý thức và kết quả tham gia phụ trách lớp, đoàn thể</td><td>10</td><td>6</td><td>8</td><td>8</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td colspan="2" style="text-align:right;font-weight:700">Tổng cộng:</td><td style="font-weight:700">100</td><td style="font-weight:700">84</td><td style="font-weight:700">82</td><td style="font-weight:700">82</td></tr>
+              <tr><td colspan="2" style="text-align:right;font-weight:700">Xếp loại:</td><td colspan="4" style="font-weight:700;color:#075ee0">Tốt</td></tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+      <div class="action-row" style="margin-top:10px">
+        <button class="btn-blue" type="button" onclick="alert('Đã lưu đánh giá rèn luyện!')">Lưu đánh giá</button>
+      </div>
+    </section>
+
+    <!-- COMMUNITY SERVICE VIEW -->
+    <section class="view" id="communityView">
+      <h1 class="page-title"><span class="page-icon"></span>Kết quả phục vụ cộng đồng</h1>
+      <div class="semester-bar">
+        <select>
+          <option selected>Tất cả học kỳ</option>
+          <option>Học kỳ 2 năm học 2025-2026</option>
+          <option>Học kỳ 1 năm học 2025-2026</option>
+        </select>
+        <button type="button">Dữ liệu</button>
+      </div>
+      <section class="box">
+        <h2>Danh sách hoạt động phục vụ cộng đồng</h2>
+        <div class="table-scroll">
+          <table style="min-width:1300px">
+            <thead>
+              <tr><th style="width:40px">TT</th><th>Tên hoạt động</th><th style="width:110px">Loại hình</th><th style="width:110px">Thời gian</th><th style="width:120px">Địa điểm</th><th style="width:80px">Số giờ</th><th style="width:100px">Trạng thái</th><th style="width:100px">Ghi chú</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td class="text-left">Chiến dịch Mùa hè xanh 2025</td><td>Tình nguyện</td><td>15/07/2025</td><td>Hòa Vang, Đà Nẵng</td><td>8</td><td style="color:green;font-weight:700">Đã duyệt</td><td></td></tr>
+              <tr><td>2</td><td class="text-left">Hiến máu nhân đạo lần 3</td><td>Tình nguyện</td><td>20/03/2026</td><td>Trường ĐH Bách Khoa</td><td>4</td><td style="color:green;font-weight:700">Đã duyệt</td><td></td></tr>
+              <tr><td>3</td><td class="text-left">Dọn vệ sinh khuôn viên trường</td><td>Lao động</td><td>10/11/2025</td><td>Khuôn viên ĐH Bách Khoa</td><td>4</td><td style="color:green;font-weight:700">Đã duyệt</td><td></td></tr>
+              <tr><td>4</td><td class="text-left">Ngày hội việc làm sinh viên 2026</td><td>Hỗ trợ</td><td>05/04/2026</td><td>Hội trường lớn</td><td>6</td><td style="color:green;font-weight:700">Đã duyệt</td><td></td></tr>
+              <tr><td>5</td><td class="text-left">Tham gia trồng cây xanh</td><td>Cộng đồng</td><td>22/01/2026</td><td>Công viên 29/3</td><td>3</td><td style="color:green;font-weight:700">Đã duyệt</td><td></td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td colspan="5" style="text-align:right;font-weight:700">Tổng số giờ phục vụ cộng đồng:</td><td style="font-weight:700">25</td><td colspan="2"></td></tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- THESIS VIEW -->
+    <section class="view" id="thesisView">
+      <h1 class="page-title"><span class="page-icon"></span>Đồ án/ Luận văn tốt nghiệp</h1>
+      <section class="box">
+        <h2>Thông tin đồ án/ luận văn tốt nghiệp</h2>
+        <div style="padding:10px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 20px">
+            <div class="field"><label>Họ tên SV:</label><input value="PHAN CÔNG HUY" readonly></div>
+            <div class="field"><label>MSSV:</label><input value="101240071" readonly></div>
+            <div class="field"><label>Ngành:</label><input value="Công nghệ chế tạo máy" readonly></div>
+            <div class="field"><label>Lớp:</label><input value="24C1B" readonly></div>
+            <div class="field"><label>Trạng thái:</label><input value="Chưa đủ điều kiện làm đồ án" readonly style="color:red;font-weight:700"></div>
+            <div class="field"><label>Số TC tích lũy:</label><input value="53.5 / 180" readonly></div>
+          </div>
+          <p class="pink-note" style="margin-top:12px">* Sinh viên cần tích lũy đủ tín chỉ theo quy định mới được đăng ký đồ án/luận văn tốt nghiệp.</p>
+        </div>
+      </section>
+      <section class="box" style="margin-top:10px">
+        <h2>Danh sách đồ án/ luận văn (nếu có)</h2>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th>STT</th><th>Mã đề tài</th><th>Tên đề tài</th><th>GV hướng dẫn</th><th>Thời gian BĐ</th><th>Thời gian KT</th><th>Điểm</th><th>Trạng thái</th></tr>
+            </thead>
+            <tbody>
+              <tr class="empty-row"><td colspan="8"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- CURRICULUM DECLARE VIEW -->
+    <section class="view" id="curriculumDeclareView">
+      <h1 class="page-title"><span class="page-icon"></span>Kê khai chương trình đào tạo</h1>
+      <section class="box">
+        <h2>Kê khai chương trình đào tạo - Công nghệ chế tạo máy K2024_ Kỹ sư</h2>
+        <p class="pink-note">* Sinh viên kê khai các học phần tự chọn trong chương trình đào tạo. Hãy chọn các học phần phù hợp với định hướng nghề nghiệp.</p>
+        <div class="table-scroll">
+          <table style="min-width:1400px">
+            <thead>
+              <tr><th style="width:35px">TT</th><th style="width:40px">HK</th><th style="width:80px">Mã HP</th><th style="width:280px">Tên học phần</th><th style="width:50px">Số TC</th><th style="width:80px">Bắt buộc</th><th style="width:80px">Tự chọn</th><th style="width:100px">Đã hoàn thành</th><th>Ghi chú</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>5</td><td class="text-left">1012510</td><td class="text-left">Xử lý vật liệu kỹ thuật</td><td>2.5</td><td></td><td><input type="checkbox" checked></td><td class="survey-check">✓</td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>2</td><td>5</td><td class="text-left">1012790</td><td class="text-left">Vật liệu hàng không và xử lý vật liệu</td><td>2.5</td><td></td><td><input type="checkbox"></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>3</td><td>7</td><td class="text-left">1012650</td><td class="text-left">Linh kiện điện tử và cảm biến công nghiệp</td><td>3</td><td></td><td><input type="checkbox" checked></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>4</td><td>7</td><td class="text-left">1012610</td><td class="text-left">Kỹ thuật điện tử và cảm biến trong máy bay</td><td>3</td><td></td><td><input type="checkbox"></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>5</td><td>7</td><td class="text-left">1012860</td><td class="text-left">Robot công nghiệp</td><td>2.5</td><td></td><td><input type="checkbox" checked></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>6</td><td>7</td><td class="text-left">1017880</td><td class="text-left">Các hệ thống sản xuất tiên tiến</td><td>2.5</td><td></td><td><input type="checkbox"></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>7</td><td>9</td><td class="text-left">1012980</td><td class="text-left">Kỹ thuật đo cơ khí chính xác</td><td>2</td><td></td><td><input type="checkbox" checked></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>8</td><td>9</td><td class="text-left">1011283</td><td class="text-left">Anh văn CN Cơ khí</td><td>2</td><td></td><td><input type="checkbox"></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>9</td><td>9</td><td class="text-left">1012990</td><td class="text-left">Thiết kế nhà máy cơ khí</td><td>2</td><td></td><td><input type="checkbox" checked></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+              <tr><td>10</td><td>9</td><td class="text-left">1013000</td><td class="text-left">Tối ưu hóa quá trình gia công cơ</td><td>2</td><td></td><td><input type="checkbox"></td><td></td><td class="text-left">Chọn 1 trong 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div class="action-row" style="margin-top:10px">
+        <button class="btn-blue" type="button" onclick="alert('Đã lưu kê khai chương trình đào tạo!')">Lưu kê khai</button>
+      </div>
+    </section>
+
+    <!-- CLASS EVAL VIEW -->
+    <section class="view" id="classEvalView">
+      <h1 class="page-title"><span class="page-icon"></span>Cán bộ lớp đánh giá rèn luyện</h1>
+      <div class="semester-bar">
+        <select>
+          <option selected>Học kỳ 2 năm học 2025-2026</option>
+          <option>Học kỳ 1 năm học 2025-2026</option>
+        </select>
+        <button type="button">Dữ liệu</button>
+      </div>
+      <section class="box">
+        <h2>Danh sách sinh viên lớp 24C1B - Đánh giá rèn luyện</h2>
+        <p class="pink-note">* Chức năng này chỉ dành cho cán bộ lớp. Bạn không phải cán bộ lớp nên không có quyền đánh giá.</p>
+        <div class="table-scroll">
+          <table style="min-width:1200px">
+            <thead>
+              <tr><th style="width:40px">TT</th><th style="width:100px">MSSV</th><th>Họ tên</th><th style="width:80px">SV tự ĐG</th><th style="width:80px">Lớp ĐG</th><th style="width:80px">Khoa ĐG</th><th style="width:100px">Xếp loại</th><th>Ghi chú</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>101240071</td><td class="text-left">Phan Công Huy</td><td>84</td><td>82</td><td>82</td><td>Tốt</td><td></td></tr>
+              <tr><td>2</td><td>101240032</td><td class="text-left">Nguyễn Văn An</td><td>90</td><td>88</td><td>87</td><td>Xuất sắc</td><td></td></tr>
+              <tr><td>3</td><td>101240045</td><td class="text-left">Trần Thị Bình</td><td>78</td><td>76</td><td>76</td><td>Khá</td><td></td></tr>
+              <tr><td>4</td><td>101240058</td><td class="text-left">Lê Hoàng Cường</td><td>85</td><td>83</td><td>83</td><td>Tốt</td><td></td></tr>
+              <tr><td>5</td><td>101240063</td><td class="text-left">Phạm Minh Đức</td><td>72</td><td>70</td><td>70</td><td>Khá</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- CLASS RESULT VIEW -->
+    <section class="view" id="classResultView">
+      <h1 class="page-title"><span class="page-icon"></span>Kết quả đánh giá rèn luyện theo lớp</h1>
+      <div class="semester-bar">
+        <select>
+          <option selected>Học kỳ 2 năm học 2025-2026</option>
+          <option>Học kỳ 1 năm học 2025-2026</option>
+          <option>Học kỳ 2 năm học 2024-2025</option>
+          <option>Học kỳ 1 năm học 2024-2025</option>
+        </select>
+        <button type="button">Dữ liệu</button>
+      </div>
+      <section class="box">
+        <h2>Kết quả đánh giá rèn luyện lớp 24C1B - Học kỳ 2 năm học 2025-2026</h2>
+        <div class="table-scroll">
+          <table style="min-width:1300px">
+            <thead>
+              <tr><th style="width:40px">TT</th><th style="width:100px">MSSV</th><th>Họ tên</th><th style="width:80px">SV tự ĐG</th><th style="width:80px">Lớp ĐG</th><th style="width:80px">Khoa ĐG</th><th style="width:80px">Trường ĐG</th><th style="width:100px">Xếp loại</th><th>Ghi chú</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>101240071</td><td class="text-left" style="font-weight:700;color:#075ee0">Phan Công Huy</td><td>84</td><td>82</td><td>82</td><td>82</td><td>Tốt</td><td></td></tr>
+              <tr><td>2</td><td>101240032</td><td class="text-left">Nguyễn Văn An</td><td>90</td><td>88</td><td>87</td><td>87</td><td>Xuất sắc</td><td></td></tr>
+              <tr><td>3</td><td>101240045</td><td class="text-left">Trần Thị Bình</td><td>78</td><td>76</td><td>76</td><td>76</td><td>Khá</td><td></td></tr>
+              <tr><td>4</td><td>101240058</td><td class="text-left">Lê Hoàng Cường</td><td>85</td><td>83</td><td>83</td><td>83</td><td>Tốt</td><td></td></tr>
+              <tr><td>5</td><td>101240063</td><td class="text-left">Phạm Minh Đức</td><td>72</td><td>70</td><td>70</td><td>70</td><td>Khá</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- ENGLISH EXAM VIEW -->
+    <section class="view" id="engExamView">
+      <h1 class="page-title"><span class="page-icon"></span>Đăng ký thi Anh văn định kỳ, chuẩn đầu ra</h1>
+      <section class="box">
+        <h2>Thông tin sinh viên</h2>
+        <div style="padding:8px 10px;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px">
+          <div class="field"><label>Họ tên:</label><input value="PHAN CÔNG HUY" readonly></div>
+          <div class="field"><label>MSSV:</label><input value="101240071" readonly></div>
+          <div class="field"><label>Lớp:</label><input value="24C1B" readonly></div>
+          <div class="field"><label>Anh văn hiện tại:</label><input value="A2.2 (Đã hoàn thành)" readonly></div>
+        </div>
+      </section>
+      <section class="box" style="margin-top:10px">
+        <h2>Danh sách kỳ thi Anh văn</h2>
+        <div class="table-scroll">
+          <table style="min-width:1300px">
+            <thead>
+              <tr>
+                <th rowspan="2">STT</th><th rowspan="2">Mã kỳ thi</th><th rowspan="2">Tên kỳ thi</th><th rowspan="2">Loại</th>
+                <th colspan="2">Thời gian đăng ký</th><th colspan="2">Thời gian thi</th>
+                <th rowspan="2">Phí (đ)</th><th rowspan="2">Đăng ký</th><th rowspan="2">Kết quả</th>
+              </tr>
+              <tr><th>Bắt đầu</th><th>Kết thúc</th><th>Ngày thi</th><th>Phòng</th></tr>
+            </thead>
+            <tbody>
+              <tr class="empty-row"><td colspan="11"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="pink-note">* Hiện tại chưa có kỳ thi Anh văn nào trong thời gian đăng ký.</p>
+      </section>
+      <section class="box" style="margin-top:10px">
+        <h2>Lịch sử thi Anh văn</h2>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th>STT</th><th>Kỳ thi</th><th>Loại</th><th>Ngày thi</th><th>Điểm</th><th>Kết quả</th><th>Ghi chú</th></tr>
+            </thead>
+            <tbody>
+              <tr class="empty-row"><td colspan="7"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- REQUEST VIEW -->
+    <section class="view" id="requestView">
+      <h1 class="page-title"><span class="page-icon"></span>Đề nghị Trường</h1>
+      <section class="box">
+        <h2>Lập đơn đề nghị</h2>
+        <div style="padding:10px">
+          <div style="display:grid;grid-template-columns:150px 1fr;gap:8px;max-width:700px">
+            <label style="text-align:right;font-weight:600">Loại đề nghị:</label>
+            <select style="height:28px;border:1px solid #aaa">
+              <option>-- Chọn loại đề nghị --</option>
+              <option>Xác nhận sinh viên</option>
+              <option>Xin cấp bảng điểm</option>
+              <option>Bảo lưu kết quả học tập</option>
+              <option>Xin nghỉ học tạm thời</option>
+              <option>Xin chuyển ngành</option>
+              <option>Xin miễn giảm học phí</option>
+              <option>Xin gia hạn học phí</option>
+              <option>Khác</option>
+            </select>
+            <label style="text-align:right;font-weight:600">Họ tên:</label>
+            <input value="Phan Công Huy" readonly style="height:28px;border:1px solid #aaa;padding:0 6px;background:#f7f7f7">
+            <label style="text-align:right;font-weight:600">MSSV:</label>
+            <input value="101240071" readonly style="height:28px;border:1px solid #aaa;padding:0 6px;background:#f7f7f7">
+            <label style="text-align:right;font-weight:600">Lớp:</label>
+            <input value="24C1B" readonly style="height:28px;border:1px solid #aaa;padding:0 6px;background:#f7f7f7">
+            <label style="text-align:right;font-weight:600">Nội dung:</label>
+            <textarea rows="5" style="border:1px solid #aaa;padding:6px;resize:vertical" placeholder="Nhập nội dung đề nghị..."></textarea>
+          </div>
+          <div class="action-row" style="margin-top:12px;text-align:left;margin-left:160px">
+            <button class="btn-blue" type="button" onclick="alert('Đã gửi đề nghị thành công!')">Gửi đề nghị</button>
+          </div>
+        </div>
+      </section>
+      <section class="box" style="margin-top:10px">
+        <h2>Danh sách đề nghị đã gửi</h2>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th>STT</th><th>Loại đề nghị</th><th>Nội dung</th><th>Ngày gửi</th><th>Trạng thái</th><th>Phản hồi</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td class="text-left">Xác nhận sinh viên</td><td class="text-left">Xin xác nhận đang là sinh viên để nộp hồ sơ vay vốn</td><td>15/03/2026</td><td style="color:green;font-weight:700">Đã xử lý</td><td class="text-left">Đã xác nhận. SV liên hệ phòng CTSV nhận giấy.</td></tr>
+              <tr><td>2</td><td class="text-left">Xin gia hạn học phí</td><td class="text-left">Xin gia hạn nộp học phí HK2 2025-2026 do hoàn cảnh gia đình khó khăn</td><td>10/02/2026</td><td style="color:#d97706;font-weight:700">Đang xử lý</td><td class="text-left"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- FEEDBACK VIEW -->
+    <section class="view" id="feedbackView">
+      <h1 class="page-title"><span class="page-icon"></span>Phản ánh</h1>
+      <section class="box">
+        <h2>Gửi phản ánh, góp ý</h2>
+        <div style="padding:10px">
+          <div style="display:grid;grid-template-columns:150px 1fr;gap:8px;max-width:700px">
+            <label style="text-align:right;font-weight:600">Danh mục:</label>
+            <select style="height:28px;border:1px solid #aaa">
+              <option>-- Chọn danh mục --</option>
+              <option>Cơ sở vật chất</option>
+              <option>Giảng dạy</option>
+              <option>Dịch vụ sinh viên</option>
+              <option>Hệ thống thông tin</option>
+              <option>Học phí</option>
+              <option>Ký túc xá</option>
+              <option>Khác</option>
+            </select>
+            <label style="text-align:right;font-weight:600">Họ tên:</label>
+            <input value="Phan Công Huy" readonly style="height:28px;border:1px solid #aaa;padding:0 6px;background:#f7f7f7">
+            <label style="text-align:right;font-weight:600">MSSV:</label>
+            <input value="101240071" readonly style="height:28px;border:1px solid #aaa;padding:0 6px;background:#f7f7f7">
+            <label style="text-align:right;font-weight:600">Tiêu đề:</label>
+            <input style="height:28px;border:1px solid #aaa;padding:0 6px" placeholder="Nhập tiêu đề phản ánh...">
+            <label style="text-align:right;font-weight:600">Nội dung:</label>
+            <textarea rows="5" style="border:1px solid #aaa;padding:6px;resize:vertical" placeholder="Nhập nội dung phản ánh, góp ý..."></textarea>
+          </div>
+          <div class="action-row" style="margin-top:12px;text-align:left;margin-left:160px">
+            <button class="btn-blue" type="button" onclick="alert('Đã gửi phản ánh thành công!')">Gửi phản ánh</button>
+          </div>
+        </div>
+      </section>
+      <section class="box" style="margin-top:10px">
+        <h2>Danh sách phản ánh đã gửi</h2>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th>STT</th><th>Danh mục</th><th>Tiêu đề</th><th>Ngày gửi</th><th>Trạng thái</th><th>Phản hồi</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Cơ sở vật chất</td><td class="text-left">Máy chiếu phòng F306 bị mờ</td><td>20/04/2026</td><td style="color:green;font-weight:700">Đã xử lý</td><td class="text-left">Đã thay bóng đèn máy chiếu.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- PASSWORD CHANGE SECTION (hidden, toggled by profile tabs) -->
+    <div id="passwordSection" style="display:none">
+      <section class="box">
+        <h2>Đổi mật khẩu</h2>
+        <div style="padding:15px 10px;max-width:500px">
+          <div class="field" style="margin-bottom:10px"><label>Mật khẩu cũ:</label><input type="password" style="height:28px;width:100%;border:1px solid #aaa;padding:0 6px"></div>
+          <div class="field" style="margin-bottom:10px"><label>Mật khẩu mới:</label><input type="password" style="height:28px;width:100%;border:1px solid #aaa;padding:0 6px"></div>
+          <div class="field" style="margin-bottom:10px"><label>Nhập lại:</label><input type="password" style="height:28px;width:100%;border:1px solid #aaa;padding:0 6px"></div>
+          <div class="action-row" style="text-align:left;margin-left:160px">
+            <button class="btn-blue" type="button" onclick="alert('Đã đổi mật khẩu thành công!')">Đổi mật khẩu</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
   </main>
   <script src="app.js"></script>
 </body>
