@@ -359,8 +359,25 @@ function setView(name){
 
 let isLoggedIn = false;
 
+function initSavedCredentials(){
+  const savedUser = localStorage.getItem("dut_saved_username");
+  const savedPass = localStorage.getItem("dut_saved_password");
+  const userEl = document.getElementById("username");
+  const passEl = document.getElementById("password");
+  if(userEl && savedUser) userEl.value = savedUser;
+  if(passEl && savedPass) passEl.value = savedPass;
+}
+
 function doLogin(e){
   if(e) e.preventDefault();
+  const userEl = document.getElementById("username");
+  const passEl = document.getElementById("password");
+  if(userEl && userEl.value){
+    localStorage.setItem("dut_saved_username", userEl.value);
+  }
+  if(passEl && passEl.value){
+    localStorage.setItem("dut_saved_password", passEl.value);
+  }
   isLoggedIn = true;
   const topNav = document.getElementById("topNav");
   if(topNav) topNav.style.display = "flex";
@@ -373,6 +390,7 @@ function doLogout(){
   const topNav = document.getElementById("topNav");
   if(topNav) topNav.style.display = "none";
   setView("login");
+  initSavedCredentials();
 }
 
 function renderCurrentTerm(){
@@ -440,7 +458,7 @@ function renderCurriculum(){
   `).join("");
 }
 
-applyTargetFinals();renderProfile();renderSummary();renderGrades();renderTuition();renderSchedule();renderCurrentTerm();renderCurriculum();
+applyTargetFinals();renderProfile();renderSummary();renderGrades();renderTuition();renderSchedule();renderCurrentTerm();renderCurriculum();initSavedCredentials();
 document.querySelectorAll("[data-view]").forEach(button=>button.addEventListener("click",()=>{setView(button.dataset.view);button.blur()}));
 
 // Profile tab switching: "Thông tin nhân thân & ngành học" vs "Đổi mật khẩu"
